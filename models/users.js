@@ -24,13 +24,11 @@ var userSchema = new Schema({
 }, { timestamps: true })
 
 userSchema.pre("save", function (next) {
-
+    if (this.password && this.isModified("password")) {
+        this.password = bcrypt.hashSync(this.password, 10)
+        next()
+    }
 })
-
-if (this.password && this.isModified("password")) {
-    this.password = bcrypt.hashSync(this.password, 10)
-    next()
-}
 
 userSchema.method.verifyPassword = function (password) {
     return bcrypt.compareSync(password, this.password)

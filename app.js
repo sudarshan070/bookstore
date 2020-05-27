@@ -12,7 +12,6 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // database connect 
-
 mongoose.connect(
   "mongodb://localhost:27017/bookStore",
   {

@@ -20,7 +20,8 @@ var userSchema = new Schema({
     isAdmin: {
         type: Boolean,
         default: true
-    }
+    },
+    image: String
 }, { timestamps: true })
 
 userSchema.pre("save", function (next) {

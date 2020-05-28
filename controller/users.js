@@ -1,5 +1,5 @@
-
 var User = require("../models/users")
+
 
 // register user 
 exports.getRegister = (req, res, next) => {
@@ -8,6 +8,7 @@ exports.getRegister = (req, res, next) => {
 
 // post  register user
 exports.postRegister = (req, res, next) => {
+    req.body.image = req.file.originalname;
     User.create(req.body, (err, user) => {
         if (err) return next(err)
         res.redirect("/users/login")

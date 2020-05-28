@@ -1,8 +1,9 @@
 <%- include("partials/header.ejs") -%>
 
-<form action="" method="POST">
+<form action="/users/register" method="POST" enctype="multipart/form-data">
   <input type="text" name="name" placeholder="Name" />
   <input type="email" name="email" placeholder="Email" />
   <input type="password" name="password" placeholder="Password" />
+  <input type="file" name="image" />
   <input type="submit" value="Sign Up" />
 </form>

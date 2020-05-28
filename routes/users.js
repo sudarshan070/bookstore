@@ -1,6 +1,23 @@
 var express = require('express');
 var router = express.Router();
-var userControllwer = require("../controller/users")
+var userController = require("../controller/users")
+var multer = require("multer")
+var path = require("path")
+
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../public/images"))
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  },
+})
+var upload = multer({ storage: storage })
+
+
+
+// multer profile image add 
 
 /* GET users listing. */
 router.get("/", function (req, res, next) {
@@ -12,21 +29,22 @@ router.get("/", function (req, res, next) {
   }
 });
 
+
+
 // registe user 
 // get register user 
-router.get("/register", userControllwer.getRegister)
+router.get("/register", userController.getRegister)
 
 // post register usser
-router.post("/register", userControllwer.postRegister)
-
+router.post("/register", upload.single("image"), userController.postRegister)
 // login user
 // get login user
-router.get("/login", userControllwer.getLogin)
+router.get("/login", userController.getLogin)
 
 // post login user
-router.post("/login", userControllwer.postLogin)
+router.post("/login", userController.postLogin)
 
 // logout user
-router.get("/logout", userControllwer.logoutUser)
+router.get("/logout", userController.logoutUser)
 
 module.exports = router;

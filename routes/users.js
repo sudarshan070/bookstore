@@ -3,8 +3,13 @@ var router = express.Router();
 var userControllwer = require("../controller/users")
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send('respond with resource');
+router.get("/", function (req, res, next) {
+  if (req.session && req.session.userId) {
+    console.log(req.session);
+    return res.send("respond with a resource");
+  } else {
+    res.redirect("/users/login");
+  }
 });
 
 // registe user 

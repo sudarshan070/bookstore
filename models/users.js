@@ -30,7 +30,7 @@ userSchema.pre("save", function (next) {
     }
 })
 
-userSchema.method.verifyPassword = function (password) {
+userSchema.methods.verifyPassword = function (password) {
     return bcrypt.compareSync(password, this.password)
 }
 

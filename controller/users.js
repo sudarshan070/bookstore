@@ -24,6 +24,13 @@ exports.postLogin = (req, res, next) => {
     var { email, password } = req.body
     User.findOne({ email }, (err, user) => {
         if (err) return next(err)
+        if (!user) {
+            res.redirect("/users/login")
+        }
+        if (!user.verifyPassword(password)) {
+            return res.redirect("/users/login")
+        }
+        req.session.userId = user.id
         res.redirect("/users/register")
     })
 }

@@ -7,6 +7,7 @@ exports.logged = (req, res, next) => {
 }
 
 exports.userInfo = (req, res, next) => {
+    console.log(req.session.userId)
     if (req.session.userId) {
         User.findById(req.session.userId),
             { email: 1, name: 1, userId: 1 },

@@ -21,4 +21,7 @@ router.get("/login", userControllwer.getLogin)
 // post login user
 router.post("/login", userControllwer.postLogin)
 
+// logout user
+router.get("/logout", userControllwer.logoutUser)
+
 module.exports = router;

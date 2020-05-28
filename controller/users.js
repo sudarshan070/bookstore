@@ -19,11 +19,17 @@ exports.getLogin = (req, res, next) => {
     res.render("login")
 }
 
-// posr  login user
+// post  login user
 exports.postLogin = (req, res, next) => {
     var { email, password } = req.body
     User.findOne({ email }, (err, user) => {
         if (err) return next(err)
         res.redirect("/users/register")
     })
+}
+
+// logout user
+exports.logoutUser = (req, res, next) => {
+    req.session.distory()
+    res.redirect("/users/login")
 }

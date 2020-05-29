@@ -6,9 +6,12 @@ var logger = require('morgan');
 var mongoose = require("mongoose")
 var session = require("express-session")
 var MongoStore = require("connect-mongo")(session)
+var passport = require("passport")
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var auth = require("./middleware/auth")
+require("dotenv").config()
+require("./moduls/passport")
 
 var app = express();
 
@@ -44,6 +47,9 @@ app.use(
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

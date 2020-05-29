@@ -14,14 +14,14 @@ var userSchema = new Schema({
         unique: true
     },
     password: {
-        type: String,
-        required: true
+        type: String
     },
     isAdmin: {
         type: Boolean,
         default: true
     },
-    image: String
+    image: String,
+    googleId: String
 }, { timestamps: true })
 
 userSchema.pre("save", function (next) {

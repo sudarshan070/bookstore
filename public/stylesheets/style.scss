@@ -134,3 +134,45 @@ table {
 *::before {
   box-sizing: border-box;
 }
+
+// header =========================
+.header_flex {
+  display: flex;
+  justify-content: space-between;
+}
+.header_container {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.header {
+  padding: 24px 0;
+  background: #f1f1f1;
+}
+.logo {
+  font-size: 28px;
+  a:hover {
+    text-decoration: none;
+  }
+}
+.input_search {
+  display: flex;
+  position: relative;
+  // justify-content: center;
+  .input-form {
+    width: 90%;
+    padding-right: 35px;
+  }
+  .search-icon {
+    position: absolute;
+    right: 35px;
+    opacity: 0.7;
+    top: 10px;
+  }
+}
+
+.flex {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}

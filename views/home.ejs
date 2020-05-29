@@ -18,23 +18,28 @@
     />
   </head>
   <body>
-    <header class="css-1_header">
-      <div class="css-1_container">
-        <div class="css-1_flex">
+    <header class="header">
+      <div class="header_container">
+        <div class="header_flex">
           <div class="logo">
-            <a href="/users/home">BookStore</a>
+            <a href="/users/home"><h1>BookStore</h1></a>
           </div>
           <div class="flex">
             <div class="input_search">
-              <input type="secrch" class="form-control" placeholder="Secrch" />
+              <input type="search" class="form-control input-form" placeholder="Search here..." />
+              <i class="search-icon fas fa-search"></i>
             </div>
             <div>
-              <button type="button" class="btn btn-primary mr-1 my-1">
-                Login
-              </button>
-              <button type="button" class="btn btn-primary mr-1 my-1">
-                Signup
-              </button>
+              <a href="/users/login">
+                <button type="button" class="btn btn-primary mr-1 my-1">
+                  Login
+                </button>
+              </a>
+              <a href="/users/register">
+                <button type="button" class="btn btn-primary mr-1 my-1">
+                  Signup
+                </button>
+              </a>
             </div>
           </div>
         </div>

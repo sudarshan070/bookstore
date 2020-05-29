@@ -4,7 +4,7 @@ var userController = require("../controller/users")
 var multer = require("multer")
 var path = require("path")
 
-
+// multer profile image add 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(__dirname, "../public/images"))
@@ -17,19 +17,13 @@ var upload = multer({ storage: storage })
 
 
 
-// multer profile image add 
+
 
 /* GET users listing. */
-router.get("/", function (req, res, next) {
-  if (req.session && req.session.userId) {
-    console.log(req.session);
-    return res.send("respond with a resource");
-  } else {
-    res.redirect("/users/login");
-  }
-});
+router.get("/",userController.getSession);
 
-
+// home route
+router.get("/home", userController.homePage)
 
 // registe user 
 // get register user 

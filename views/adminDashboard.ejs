@@ -49,10 +49,22 @@
         Add Category
       </button>
     </a>
-    <div>
-      <% category.filter( category => { %>
-          <%= category.name%>
-      <% }) %>
-    </div>
+
+    <% category.filter( category => { %>
+    <a href="#">
+      <div class="card categoryCard" style="width: 18rem;">
+        <img
+          src="/images/<%= category.image%>"
+          class="card-img-top"
+          alt="bookCategory"
+        />
+        <div class="card-body">
+          <p class="card-text">
+            <%= category.name%>
+          </p>
+        </div>
+      </div>
+    </a>
+    <% }) %>
   </body>
 </html>

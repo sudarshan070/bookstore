@@ -28,4 +28,7 @@ router.get('/createCategory', auth.logged, adminController.createCategory);
 // createCategory of book post route
 router.post('/createCategory', auth.logged, upload.single("image"), adminController.postCreateCategory);
 
+// Adding Books
+// 
+
 module.exports = router;

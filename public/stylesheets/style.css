@@ -202,4 +202,11 @@ body {
       -ms-flex-align: center;
           align-items: center;
 }
+
+.categoryCard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 34px;
+}
 /*# sourceMappingURL=style.css.map */

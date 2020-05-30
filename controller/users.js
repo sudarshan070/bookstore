@@ -1,7 +1,5 @@
 var User = require("../models/users")
 
-
-
 // get session 
 exports.getSession = function (req, res, next) {
     if (req.session && req.session.userId) {
@@ -10,11 +8,6 @@ exports.getSession = function (req, res, next) {
     } else {
         res.redirect("/users/login");
     }
-}
-
-// home page
-exports.homePage = (req, res, next) => {
-    res.render("home")
 }
 
 // register user 
@@ -55,6 +48,6 @@ exports.postLogin = (req, res, next) => {
 // logout user
 // change here delete user wikthout distroy session
 exports.logoutUser = (req, res, next) => {
-    req.session.distory()
-    res.redirect("/users/login")
+    req.session = null;
+    res.redirect("/home")
 }

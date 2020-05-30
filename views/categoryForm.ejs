@@ -1,0 +1,11 @@
+<%- include("partials/header.ejs") -%>
+
+<form
+  action="/admin/createCategory"
+  method="POST"
+  enctype="multipart/form-data"
+>
+  <input type="text" name="name" placeholder="Name" />
+  <input type="file" name="image" />
+  <input type="submit" value="Add" />
+</form>

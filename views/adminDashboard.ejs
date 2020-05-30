@@ -3,14 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BookStore | HomePage</title>
+    <title>BookStore</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;400;600;700&display=swap"
-      rel="stylesheet"
-    />
-
     <script
       src="https://kit.fontawesome.com/a548432773.js"
       crossorigin="anonymous"
@@ -28,7 +22,7 @@
       <div class="header_container">
         <div class="header_flex">
           <div class="logo">
-            <a href="/home"><h1>BookStore</h1></a>
+            <a href="/home"><h1>Admin</h1></a>
           </div>
           <div class="flex">
             <div class="input_search">
@@ -40,21 +34,9 @@
               <i class="search-icon fas fa-search"></i>
             </div>
             <div>
-              <a href="/users/login">
+              <a href="/users/logout">
                 <button type="button" class="btn btn-primary mr-1 my-1">
-                  Login
-                </button>
-              </a>
-
-              <a href="/users/register">
-                <button type="button" class="btn btn-primary mr-1 my-1">
-                  Signup
-                </button>
-              </a>
-
-              <a href="/auth/google">
-                <button type="button" class="btn btn-primary mr-1 my-1">
-                  Admin Login
+                  Logout
                 </button>
               </a>
             </div>
@@ -62,6 +44,15 @@
         </div>
       </div>
     </header>
-    <main></main>
+    <a href="/admin/createCategory">
+      <button type="button" class="btn btn-primary mr-1 my-1">
+        Add Category
+      </button>
+    </a>
+    <div>
+      <% category.filter( category => { %>
+          <%= category.name%>
+      <% }) %>
+    </div>
   </body>
 </html>

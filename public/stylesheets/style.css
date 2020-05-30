@@ -141,6 +141,10 @@ table {
           box-sizing: border-box;
 }
 
+body {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
 .header_flex {
   display: -webkit-box;
   display: -ms-flexbox;

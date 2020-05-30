@@ -1,12 +1,18 @@
 var User = require("../models/users")
 
 exports.logged = (req, res, next) => {
-    if (req.session.userId) {
+    if (req.session.userId || req.session.passport) {
         return next()
     }
 }
+// exports.verifyAdmin = (req, res, next) => {
+//     if (req.session.userId) {
+//         return next()
+//     }
+// }
 
 exports.userInfo = (req, res, next) => {
+
     if (req.session.passport) {
         req.session.userId = req.session.passport.user
         User.findById(
@@ -15,8 +21,8 @@ exports.userInfo = (req, res, next) => {
             (err, user) => {
                 if (err) return next(err)
                 req.user = user
-                req.locals.userInfo = user
-                next()
+                req.locals = { admin: user }
+                next();
             }
         )
     } else if (req.session.userId) {

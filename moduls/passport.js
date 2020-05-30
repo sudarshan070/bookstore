@@ -15,7 +15,9 @@ passport.use(new GoogleStrategy({
         let newAdmin = {
             email: profile.emails[0].value,
             googleId: profile.id,
-            name: profile.displayName
+            name: profile.displayName,
+            isAdmin: true,
+            password:process.env.ADMINPASSWORD
         }
         User.findOneAndUpdate({ email: profile.emails[0].value },
             newAdmin,

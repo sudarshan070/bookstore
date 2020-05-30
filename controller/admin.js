@@ -1,5 +1,6 @@
 var User = require("../models/users")
 var Category = require("../models/category")
+var Book = require("../models/books")
 
 
 
@@ -27,3 +28,27 @@ exports.postCreateCategory = (req, res, next) => {
 }
 
 
+// get all book 
+exports.getAllBook = (req, res, next) => {
+    Book.find({}).exec((err, books) => {
+        // console.log(books, "get all books")
+        if (err) return next(err)
+        res.render("allbook")
+    })
+}
+
+
+// get createbook
+exports.getCreateBook = (req, res, next) => {
+    res.render("createBook")
+}
+
+// post createBook
+exports.postCreateBook = (req, res, next) => {
+    req.body.image = req.file.originalname
+    Book.create(req.body, (err, books) => {
+        if (err) return next(err)
+        // console.log(books, "========Book=======")
+        res.redirect("/admin/allbook")
+    })
+}

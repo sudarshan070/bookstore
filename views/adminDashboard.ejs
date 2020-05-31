@@ -16,6 +16,11 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    />
   </head>
   <body>
     <header class="partials_header">
@@ -76,6 +81,12 @@
             <%= category.name%>
           </p>
         </div>
+        <a href="/admin/<%=category.id %>/edit">
+          <button class="positive ui button">Edit</button>
+        </a>
+        <a href="/admin/<%=category.id %>/delete">
+          <button class="negative ui button">Delete</button>
+        </a>
       </div>
     </a>
     <% }) %>

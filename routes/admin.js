@@ -28,6 +28,12 @@ router.get('/createCategory', auth.logged, adminController.createCategory);
 // createCategory of book post route
 router.post('/createCategory', auth.logged, upload.single("image"), adminController.postCreateCategory);
 
+// // get edit category
+router.get("/:id/edit", adminController.editCategory)
+
+// // post edit category
+router.post("/:id/edit", adminController.postEditCategory)
+
 // get all books
 router.get("/allbook", adminController.getAllBook)
 
@@ -37,5 +43,10 @@ router.get("/createBook", adminController.getCreateBook)
 
 // post book route
 router.post("/createBook", upload.single("image"), adminController.postCreateBook)
+
+// book detail
+// get book detail
+router.get("/allBook/detail", adminController.getBookDetail)
+
 
 module.exports = router;

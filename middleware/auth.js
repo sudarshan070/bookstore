@@ -1,6 +1,10 @@
 var User = require("../models/users")
 
 exports.logged = (req, res, next) => {
+    console.log(req.session.userId, "auth req.session.userId")
+    console.log(req.session.passport, "auth req.session.pass")
+    console.log(req.session, "req.session")
+    console.log(req.session.passport.user.id, "req.session.passport.user.id")
     if (req.session.userId || req.session.passport) {
         return next()
     }
@@ -12,9 +16,10 @@ exports.logged = (req, res, next) => {
 // }
 
 exports.userInfo = (req, res, next) => {
-
     if (req.session.passport) {
         req.session.userId = req.session.passport.user
+        console.log(req.session.userId, "auth req.session.userId")
+        console.log(req.session.passport.user, "auth req.session.passport.user")
         User.findById(
             req.session.userId,
             { email: 1, name: 1, userId: 1, image: 1 },

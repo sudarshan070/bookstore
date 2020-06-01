@@ -1,7 +1,8 @@
 <%- include("partials/header.ejs") -%>
 
-<form action="/admin/<%=category.id %>/edit" method="POST">
+<form action="/admin/<%=category.id %>/edit" method="POST" enctype="multipart/form-data">
   <input type="text" name="name" value="<%= category.name%>" />
+  <input type="file" value="<%= category.image%>">
   <input type="submit" value="Add" />
 </form>
 

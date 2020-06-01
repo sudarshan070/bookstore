@@ -13,8 +13,8 @@ var bookSchema = new Schema({
         required: true
     },
     category: {
-        type: Schema.Types.ObjectId,
-        ref: "Category"
+        type: String,
+        required: true
     },
     detail: String,
     price: String,

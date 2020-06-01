@@ -28,9 +28,10 @@ exports.postCreateCategory = (req, res, next) => {
         res.redirect("/admin")
     })
 }
+
+
 // eddit category
 exports.editCategory = (req, res, next) => {
-    console.log(req.params.id, "edit catrgory id")
     Category.findById(req.params.id, (err, category) => {
         if (req.session.userId) {
             if (err) return next(err)
@@ -46,6 +47,8 @@ exports.postEditCategory = (req, res, next) => {
         res.redirect("/admin")
     })
 }
+
+
 // delete category
 exports.deleteCategory = async (req, res, next) => {
     try {
@@ -58,6 +61,29 @@ exports.deleteCategory = async (req, res, next) => {
 
 }
 
+
+// get createbook
+exports.getCreateBook = async (req, res, next) => {
+    try {
+        var category = await Category.find({}, (err, categories) => {
+            if (err) return next(err)
+            res.render("createBook", { categories })
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+// post createBook
+exports.postCreateBook = (req, res, next) => {
+    req.body.image = req.file.originalname
+    Book.create(req.body, (err, books) => {
+        if (err) return next(err)
+        res.redirect("/admin/allBook")
+    })
+}
+
+
 // get all book 
 exports.getAllBook = (req, res, next) => {
     Book.find({}).exec((err, books) => {
@@ -66,23 +92,40 @@ exports.getAllBook = (req, res, next) => {
     })
 }
 
-
-// get createbook
-exports.getCreateBook = (req, res, next) => {
-    res.render("createBook")
-}
-
-// post createBook
-exports.postCreateBook = (req, res, next) => {
-    req.body.image = req.file.originalname
-    Book.create(req.body, (err, books) => {
+// get book detail
+exports.getBookDetail = (req, res, next) => {
+    Book.findById(req.params.id).exec((err, books) => {
         if (err) return next(err)
-        res.redirect("/admin/allbook")
+        res.render("bookdetail", { books })
     })
 }
 
+// get edit book 
+exports.getEditBook = async (req, res, next) => {
+    try {
+        var category = await Category.find({}, (err, categories) => {
+            if (err) return next(err)
+            Book.findById(req.params.id, (err, books) => {
+                if (req.session.userId) {
+                    if (err) return next(err)
+                    res.render("editBook", { books, categories })
+                }
+            })
+        })
+    } catch (error) {
+        next(error)
+    }
+}
 
-// get book detail
-exports.getBookDetail = (req, res, next) => {
-    res.render("bookdetail")
+// post edit book
+exports.postEditBook = async (req, res, next) => {
+    console.log(" in edit book")
+    try {
+        await Book.findByIdAndUpdate(req.params.id, req.body, (err, books) => {
+            if (err) return next(err)
+            res.redirect("/admin/allBook")
+        })
+    } catch (error) {
+        next(error)
+    }
 }

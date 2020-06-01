@@ -1,0 +1,22 @@
+<%- include("partials/header.ejs") -%>
+<form action="/admin/allBook/<%= books.id%>/edit" method="POST" enctype="multipart/form-data">
+  <input type="text" name="author" value="<%= books.author%>" />
+  <input type="text" name="title" value="<%= books.title%>" />
+  <select name="category">
+    <option name="" value="0">Select category</option>
+    <% categories.forEach( category => { %>
+    <option value="<%=category.name%>"><%=category.name%></option>
+    <% })%>
+  </select>
+  <input type="text" name="detail" value="<%= books.detail%>" />
+  <input type="text" name="price" value="<%= books.price%>" />
+  <input type="text" name="publisher" value="<%= books.publisher%>" />
+  <input type="text" name="stock" value="<%= books.stock%>" />
+  <input type="submit" value="Add Book" />
+</form>
+
+<a href="/admin">
+  <button type="button" class="btn btn-primary mr-1 my-1">
+    Admin Home
+  </button>
+</a>

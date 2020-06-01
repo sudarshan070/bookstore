@@ -1,3 +1,24 @@
 <%- include("partials/header.ejs") -%>
 
+<a href="/admin/allBook/<%= books.id%>/edit">
+    <button class="positive ui button">Edit</button>
+  </a>
+  <a href="/admin/allBook/<%= books.id%>/delete">
+    <button class="negative ui button">Delete</button>
+  </a>
 
+<p>titel: <%=books.title%></p>
+<p>author: <%=books.author%></p>
+<p>category: <%=books.category%></p>
+<p>detail: <%=books.detail%></p>
+<p>price: <%=books.price%></p>
+<p>publisher: <%=books.publisher%></p>
+<p>stock: <%=books.stock%></p>
+
+<img src="/images/<%= books.image%>" width="400px" />
+
+<a href="/admin">
+    <button type="button" class="btn btn-primary mr-1 my-1">
+      Admin Home
+    </button>
+  </a>

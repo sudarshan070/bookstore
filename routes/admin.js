@@ -36,9 +36,6 @@ router.post("/:id/edit", auth.logged, adminController.postEditCategory)
 // delete category
 router.get("/:id/delete", auth.logged, adminController.deleteCategory)
 
-// get all books
-router.get("/allbook",auth.logged, adminController.getAllBook)
-
 // Adding Books
 // get book route 
 router.get("/createBook",auth.logged, adminController.getCreateBook)
@@ -46,9 +43,20 @@ router.get("/createBook",auth.logged, adminController.getCreateBook)
 // post book route
 router.post("/createBook",auth.logged, upload.single("image"), adminController.postCreateBook)
 
+// get all books
+router.get("/allBook",auth.logged, adminController.getAllBook)
+
 // book detail
 // get book detail
-router.get("/allBook/detail",auth.logged, adminController.getBookDetail)
+router.get("/allBook/:id",auth.logged, adminController.getBookDetail)
+
+// get edit book 
+router.get("/allBook/:id/edit", auth.logged, adminController.getEditBook)
+
+// post edit book
+router.post("/allBook/:id/edit", auth.logged, adminController.postEditBook)
+
+
 
 
 module.exports = router;

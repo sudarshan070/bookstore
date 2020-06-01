@@ -1,8 +1,13 @@
 <%- include("partials/header.ejs") -%>
 <form action="" method="POST" enctype="multipart/form-data">
   <input type="text" name="title" placeholder="Title" />
-  <input type="text" name="authore" placeholder="Authore" />
-  <input type="text" name="category" placeholder="Category" />
+  <input type="text" name="author" placeholder="Author" />
+  <select name="category">
+    <option name="" value="0">Select category</option>
+    <% categories.forEach( category => { %>
+    <option value="<%=category.name%>"><%=category.name%></option>
+    <% })%>
+  </select>
   <input type="text" name="detail" placeholder="Detail" />
   <input type="text" name="price" placeholder="Price" />
   <input type="text" name="publisher" placeholder="Publisher" />

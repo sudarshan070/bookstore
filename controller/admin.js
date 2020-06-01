@@ -23,7 +23,6 @@ exports.createCategory = (req, res, next) => {
 exports.postCreateCategory = (req, res, next) => {
     req.body.image = req.file.originalname;
     req.body.userId = req.session.userId;
-    //   req.body.author = res.locals.userInfo.name;
     Category.create(req.body, (err, category) => {
         if (err) return next(err)
         res.redirect("/admin")
@@ -40,12 +39,23 @@ exports.editCategory = (req, res, next) => {
     })
 }
 
-// // post edit category
-exports.postEditCategory =  (req, res, next) => {
+// post edit category
+exports.postEditCategory = (req, res, next) => {
     Category.findByIdAndUpdate(req.params.id, req.body, (err, category) => {
         if (err) return next(err)
         res.redirect("/admin")
     })
+}
+// delete category
+exports.deleteCategory = async (req, res, next) => {
+    try {
+        var category = await Category.findByIdAndDelete(req.params.id)
+        console.log("deleted")
+        res.redirect("/admin")
+    } catch (error) {
+        next(error)
+    }
+
 }
 
 // get all book 

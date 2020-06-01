@@ -20,7 +20,6 @@ var upload = multer({ storage: storage })
 
 // admin dashbord
 router.get('/', auth.logged, adminController.getDashboard);
-// router.get('/', auth.logged, adminController.getDashboard);
 
 // createCategory of book get route
 router.get('/createCategory', auth.logged, adminController.createCategory);
@@ -28,25 +27,28 @@ router.get('/createCategory', auth.logged, adminController.createCategory);
 // createCategory of book post route
 router.post('/createCategory', auth.logged, upload.single("image"), adminController.postCreateCategory);
 
-// // get edit category
-router.get("/:id/edit", adminController.editCategory)
+ // get edit category
+router.get("/:id/edit", auth.logged, adminController.editCategory)
 
-// // post edit category
-router.post("/:id/edit", adminController.postEditCategory)
+ // post edit category
+router.post("/:id/edit", auth.logged, adminController.postEditCategory)
+
+// delete category
+router.get("/:id/delete", auth.logged, adminController.deleteCategory)
 
 // get all books
-router.get("/allbook", adminController.getAllBook)
+router.get("/allbook",auth.logged, adminController.getAllBook)
 
 // Adding Books
 // get book route 
-router.get("/createBook", adminController.getCreateBook)
+router.get("/createBook",auth.logged, adminController.getCreateBook)
 
 // post book route
-router.post("/createBook", upload.single("image"), adminController.postCreateBook)
+router.post("/createBook",auth.logged, upload.single("image"), adminController.postCreateBook)
 
 // book detail
 // get book detail
-router.get("/allBook/detail", adminController.getBookDetail)
+router.get("/allBook/detail",auth.logged, adminController.getBookDetail)
 
 
 module.exports = router;

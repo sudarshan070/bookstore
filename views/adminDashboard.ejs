@@ -68,7 +68,7 @@
       </button>
     </a>
 
-    <% category.filter( category => { %>
+    <% categories.forEach( category => { %>
     <a href="/admin/getCategory/<%=category.name%>">
       <div class="card categoryCard" style="width: 18rem;">
         <img
@@ -90,5 +90,10 @@
       </div>
     </a>
     <% }) %>
+    <div>
+      <% users.forEach( user => { %>
+      <p><%=user.name%></p>
+      <% }) %>
+    </div>
   </body>
 </html>

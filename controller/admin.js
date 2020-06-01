@@ -1,14 +1,18 @@
-
+var User = require("../models/users")
 var Category = require("../models/category")
 var Book = require("../models/books")
 
 
 // admin dashboard
-exports.getDashboard = (req, res, next) => {
-    Category.find({}).exec((err, category) => {
-        if (err) return next(err)
-        res.render("adminDashboard", { category });
-    })
+exports.getDashboard = async (req, res, next) => {
+    try {
+        var categories = await Category.find({});
+        var allUsers = await User.find({});
+        var users = allUsers.filter(user => !user.isAdmin)
+        res.render("adminDashboard", { categories, users });
+    } catch (error) {
+        next(error)
+    }
 }
 
 // get CreateCategory
@@ -73,10 +77,8 @@ exports.getCategoryWiseBook = (req, res, next) => {
 // get createbook
 exports.getCreateBook = async (req, res, next) => {
     try {
-        var category = await Category.find({}, (err, categories) => {
-            if (err) return next(err)
-            res.render("createBook", { categories })
-        })
+        var categories = await Category.find({})
+        res.render("createBook", { categories })
     } catch (error) {
         next(error)
     }
@@ -111,15 +113,11 @@ exports.getBookDetail = (req, res, next) => {
 // get edit book 
 exports.getEditBook = async (req, res, next) => {
     try {
-        var category = await Category.find({}, (err, categories) => {
-            if (err) return next(err)
-            Book.findById(req.params.id, (err, books) => {
-                if (req.session.userId) {
-                    if (err) return next(err)
-                    res.render("editBook", { books, categories })
-                }
-            })
-        })
+        var categories = await Category.find({})
+        var books = await Book.findById(req.params.id)
+        if (req.session.userId) {
+            res.render("editBook", { books, categories })
+        }
     } catch (error) {
         next(error)
     }
@@ -128,10 +126,8 @@ exports.getEditBook = async (req, res, next) => {
 // post edit book
 exports.postEditBook = async (req, res, next) => {
     try {
-        await Book.findByIdAndUpdate(req.params.id, req.body, (err, books) => {
-            if (err) return next(err)
-            res.redirect("/admin/allBook")
-        })
+        var books = await Book.findByIdAndUpdate(req.params.id, req.body)
+        res.redirect("/admin/allBook")
     } catch (error) {
         next(error)
     }

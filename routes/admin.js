@@ -62,4 +62,6 @@ router.post("/allBook/:id/edit", auth.logged, adminController.postEditBook)
 // delete book
 router.get("/allBook/:id/delete", auth.logged, adminController.deleteBooks)
 
+
+
 module.exports = router;

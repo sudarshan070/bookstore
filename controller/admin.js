@@ -119,12 +119,21 @@ exports.getEditBook = async (req, res, next) => {
 
 // post edit book
 exports.postEditBook = async (req, res, next) => {
-    console.log(" in edit book")
     try {
         await Book.findByIdAndUpdate(req.params.id, req.body, (err, books) => {
             if (err) return next(err)
             res.redirect("/admin/allBook")
         })
+    } catch (error) {
+        next(error)
+    }
+}
+
+// delete book
+exports.deleteBooks = async (req, res, next) => {
+    try {
+        var books = await Book.findByIdAndDelete(req.params.id)
+        res.redirect("/admin/allBook")
     } catch (error) {
         next(error)
     }

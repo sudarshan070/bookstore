@@ -69,7 +69,7 @@
     </a>
 
     <% category.filter( category => { %>
-    <a href="#">
+    <a href="/admin/getCategory/<%=category.name%>">
       <div class="card categoryCard" style="width: 18rem;">
         <img
           src="/images/<%= category.image%>"

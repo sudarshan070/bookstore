@@ -1,0 +1,32 @@
+<%- include("partials/header.ejs") -%>
+
+<a href="/admin">
+  <button type="button" class="btn btn-primary mr-1 my-1">
+    Admin Home
+  </button>
+</a>
+
+<% books.filter(books =>{%>
+    <div class="ui card">
+      <div class="image">
+        <img src="/images/<%= books.image%>" />
+      </div>
+      <div class="content">
+        <a href="/admin/allBook/<%= books.id%>" class="header">
+          <%= books.title%>
+        </a>
+        <div class="meta">
+          <span class="date"><%= books.authore%></span>
+        </div>
+        <div class="description">
+          <%= books.detail%>
+        </div>
+      </div>
+      <div class="extra content">
+        <a>
+          <i class="book icon"></i>
+          <%= books.stock%>
+        </a>
+      </div>
+    </div>
+    <%})%>

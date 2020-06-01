@@ -46,6 +46,9 @@ router.post("/createBook",auth.logged, upload.single("image"), adminController.p
 // get all books
 router.get("/allBook",auth.logged, adminController.getAllBook)
 
+// get categoriwise books
+router.get("/getCategory/:name", auth.logged, adminController.getCategoryWiseBook)
+
 // book detail
 // get book detail
 router.get("/allBook/:id",auth.logged, adminController.getBookDetail)

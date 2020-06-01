@@ -61,6 +61,14 @@ exports.deleteCategory = async (req, res, next) => {
 
 }
 
+exports.getCategoryWiseBook = (req, res, next) => {
+    if (req.session && req.session.userId) {
+        Book.find({ category: req.params.name }, (err, books) => {
+            return res.render("categoriwiseBook", { books })
+        })
+    }
+}
+
 
 // get createbook
 exports.getCreateBook = async (req, res, next) => {

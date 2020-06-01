@@ -209,4 +209,19 @@ body {
   display: flex;
   margin-bottom: 34px;
 }
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.userHome {
+  padding-top: 4rem;
+}
+
+.userHome h2 {
+  font-size: 44px;
+  color: #464444;
+  text-align: center;
+}
 /*# sourceMappingURL=style.css.map */

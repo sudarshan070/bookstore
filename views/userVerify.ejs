@@ -1,0 +1,6 @@
+<%- include("partials/header.ejs") -%>
+
+<form action="/users/<%=email%>/verify">
+  <input type="text" name="verification" placeholder="Enter verify code " />
+  <input type="submit" value="submit" />
+</form>

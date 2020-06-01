@@ -1,6 +1,8 @@
 var User = require("../models/users")
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
+var Category = require("../models/category")
+var Book = require("../models/books")
 
 
 // get session 
@@ -29,8 +31,8 @@ exports.postRegister = async (req, res, next) => {
             pass: process.env.PASSWORDS
         }
     }));
-    console.log(transporter)
     var verification = Math.random().toString(36).slice(2);
+    console.log(verification, "verification ------------ - -")
 
     var mailOptions = {
         from: process.env.EMAIL,
@@ -40,7 +42,6 @@ exports.postRegister = async (req, res, next) => {
     };
     console.log(req.body.email)
     req.body.verification = verification
-    console.log(verification, "verification=====================")
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
             console.log(error);
@@ -65,7 +66,7 @@ exports.nodemailer = async (req, res) => {
             )
             res.redirect("/home")
         }
-        if (user.verification === req.body.verification) {
+        if (!user.verification === req.body.verification) {
             res.send("not verified")
         }
     } catch (error) {
@@ -91,7 +92,7 @@ exports.postLogin = (req, res, next) => {
             return res.redirect("/users/login")
         }
         req.session.userId = user.id
-        res.redirect("/users/register")
+        res.redirect("/users/shopping")
     })
 }
 
@@ -100,4 +101,17 @@ exports.postLogin = (req, res, next) => {
 exports.logoutUser = (req, res, next) => {
     req.session = null;
     res.redirect("/home")
+}
+
+
+// shoping 
+
+exports.shopping = async (req, res, next) => {
+    try {
+        var categories = await Category.find({});
+        var allUsers = await User.find({});
+        res.render("shopping", { categories, allUsers });
+    } catch (error) {
+        next(error)
+    }
 }

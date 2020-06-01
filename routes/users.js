@@ -40,7 +40,10 @@ router.post("/login", userController.postLogin)
 router.get("/logout", userController.logoutUser)
 
 
-// 
+// verify user
 router.post("/:email/verify", userController.nodemailer)
+
+// shoppig route
+router.get("/shopping", userController.shopping)
 
 module.exports = router;

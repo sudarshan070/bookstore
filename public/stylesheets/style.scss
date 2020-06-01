@@ -183,3 +183,17 @@ body {
   display: flex;
   margin-bottom: 34px;
 }
+
+// user home page
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+.userHome {
+  padding-top: 4rem;
+  h2 {
+    font-size: 44px;
+    color: #464444;
+    text-align: center;
+  }
+}

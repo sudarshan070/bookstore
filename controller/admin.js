@@ -31,6 +31,7 @@ exports.postCreateCategory = (req, res, next) => {
 }
 // eddit category
 exports.editCategory = (req, res, next) => {
+    console.log(req.params.id, "edit catrgory id")
     Category.findById(req.params.id, (err, category) => {
         if (req.session.userId) {
             if (err) return next(err)
@@ -40,12 +41,11 @@ exports.editCategory = (req, res, next) => {
 }
 
 // // post edit category
-exports.postEditCategory = (req, res, next) => {
-    try {
-        console.log("in edit ")
-    } catch (error) {
-        next(error)
-    }
+exports.postEditCategory =  (req, res, next) => {
+    Category.findByIdAndUpdate(req.params.id, req.body, (err, category) => {
+        if (err) return next(err)
+        res.redirect("/admin")
+    })
 }
 
 // get all book 

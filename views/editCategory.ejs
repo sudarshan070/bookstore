@@ -1,7 +1,12 @@
 <%- include("partials/header.ejs") -%>
 
-<form action="/:id/edit" method="POST">
+<form action="/admin/<%=category.id %>/edit" method="POST">
   <input type="text" name="name" value="<%= category.name%>" />
-  <input type="file" name="image" />
   <input type="submit" value="Add" />
 </form>
+
+<a href="/admin">
+  <button type="button" class="btn btn-primary mr-1 my-1">
+    Admin Home
+  </button>
+</a>

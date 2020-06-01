@@ -17,8 +17,8 @@ exports.getDashboard = async (req, res, next) => {
 
 // get CreateCategory
 exports.createCategory = (req, res, next) => {
-    console.log(req.session, req.session.userId, "========")
-    if (req.session && req.session.userId) {
+    console.log(req.session)
+    if (req.session) {
         res.render("categoryForm");
     }
 }
@@ -66,7 +66,7 @@ exports.deleteCategory = async (req, res, next) => {
 }
 
 exports.getCategoryWiseBook = (req, res, next) => {
-    if (req.session && req.session.userId) {
+    if (req.session) {
         Book.find({ category: req.params.name }, (err, books) => {
             return res.render("categoriwiseBook", { books })
         })

@@ -1,4 +1,7 @@
 var User = require("../models/users")
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
+
 
 // get session 
 exports.getSession = function (req, res, next) {
@@ -16,13 +19,60 @@ exports.getRegister = (req, res, next) => {
 }
 
 // post  register user
-exports.postRegister = (req, res, next) => {
+exports.postRegister = async (req, res, next) => {
     req.body.image = req.file.originalname;
-    User.create(req.body, (err, user) => {
+
+    var transporter = nodemailer.createTransport(smtpTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORDS
+        }
+    }));
+    console.log(transporter)
+    var verification = Math.random().toString(36).slice(2);
+
+    var mailOptions = {
+        from: process.env.EMAIL,
+        to: req.body.email,
+        subject: 'Sending Email from book store',
+        text: `That was easy! ${verification}`
+    };
+    console.log(req.body.email)
+    req.body.verification = verification
+    console.log(verification, "verification=====================")
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+    await User.create(req.body, (err, user) => {
         if (err) return next(err)
         res.redirect("/users/login")
     })
 }
+
+exports.nodemailer = async (req, res) => {
+    try {
+        var user = await User.findOne({ email: req.parama.email })
+        if (user.verification === req.body.verification) {
+            var updateUser = await User.updateOne(
+                { email: req.parama.email },
+                { isVerified: true },
+                { new: true }
+            )
+            res.redirect("/home")
+        }
+        if (user.verification === req.body.verification) {
+            res.send("not verified")
+        }
+    } catch (error) {
+        next(error)
+    }
+}
+
 
 // get login user
 exports.getLogin = (req, res, next) => {

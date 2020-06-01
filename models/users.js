@@ -21,7 +21,12 @@ var userSchema = new Schema({
         default: false
     },
     image: String,
-    googleId: String
+    googleId: String,
+    verification: String,
+    isVerified: {
+        type: Boolean,
+        default: false
+    }
 }, { timestamps: true })
 
 userSchema.pre("save", function (next) {

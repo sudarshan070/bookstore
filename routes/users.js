@@ -40,4 +40,7 @@ router.post("/login", userController.postLogin)
 router.get("/logout", userController.logoutUser)
 
 
+// 
+router.post("/:email/verify", userController.nodemailer)
+
 module.exports = router;

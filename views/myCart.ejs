@@ -1,0 +1,13 @@
+<%- include("partials/logoutHeader.ejs") -%>
+
+
+<% booklist.forEach (book =>{ %>
+<%= book.qty%>
+<%= book.book.title%>
+<%= book.book.author%>
+<%= book.book.category%>
+<%= book.book.price%>
+
+<img src="/images/<%= book.book.image%>" height="200px"/>
+
+    <%})%>

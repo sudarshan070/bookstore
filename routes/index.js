@@ -13,16 +13,16 @@ var User = require('../models/users')
 router.post("/add/:bookId", async (req, res, next) => {
   try {
     var book = await Book.findById(req.params.bookId);
-    var booklist= await Booklist.findOne({book:book.id});
-    var cart = await Cart.findOne({userId:req.user.id})
-    if(booklist){
-      var booklist= await Booklist.findByIdAndUpdate(booklist.id,{$inc:{qty:req.body.qty}},{new:true});
-    }else{
-      req.body.book= book.id;
-      req.body.cart=cart.id
-      var booklist= await Booklist.create(req.body);
-      var cart= await Cart.findByIdAndUpdate(cart.id,{$addToSet:{bookList:booklist.id}},{new:true})
-     
+    var booklist = await Booklist.findOne({ book: book.id });
+    var cart = await Cart.findOne({ userId: req.user.id })
+    if (booklist) {
+      var booklist = await Booklist.findByIdAndUpdate(booklist.id, { $inc: { qty: req.body.qty } }, { new: true });
+    } else {
+      req.body.book = book.id;
+      req.body.cart = cart.id
+      var booklist = await Booklist.create(req.body);
+      var cart = await Cart.findByIdAndUpdate(cart.id, { $addToSet: { bookList: booklist.id } }, { new: true })
+
     }
     res.redirect(`/users/shopping/bookDetail/${book.id}`)
   } catch (error) {
@@ -31,13 +31,14 @@ router.post("/add/:bookId", async (req, res, next) => {
 })
 
 // my cart 
-router.get("/mycart", async(req,res,next)=>{
+router.get("/mycart", async (req, res, next) => {
   try {
-    var cart= await Cart.findOne({userId:req.user.id});
-    console.log(cart,"cart")
-    var  booklist= await Booklist.find({cart:cart.id});
-    console.log(booklist,"here we get")
-    res.render('mycart',{booklist})
+    var cart = await Cart.findOne({ userId: req.user.id });
+    console.log(cart, "cart")
+    var booklist = await Booklist.find({ cart: cart.id })
+      .populate({ path: "book", select: "title author category price image" })
+    console.log(booklist, "here we get")
+    res.render('myCart', { booklist })
   } catch (error) {
     next(error)
   }

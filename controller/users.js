@@ -2,7 +2,8 @@ var User = require("../models/users")
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 var Category = require("../models/category")
-var Book = require("../models/books")
+var Book = require("../models/books");
+var Cart=require('../models/cart')
 
 
 // get session 
@@ -31,7 +32,7 @@ exports.postRegister = async (req, res, next) => {
             pass: process.env.PASSWORDS
         }
     }));
-    var verification = Math.random().toString(36).slice(2);
+    var verification = Math.floor(Math.random()*1000000);
     console.log(verification, "verification ------------ - -")
 
     var mailOptions = {
@@ -40,7 +41,6 @@ exports.postRegister = async (req, res, next) => {
         subject: 'Sending Email from book store',
         text: `That was easy! ${verification}`
     };
-    console.log(req.body.email)
     req.body.verification = verification
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
@@ -49,25 +49,25 @@ exports.postRegister = async (req, res, next) => {
             console.log('Email sent: ' + info.response);
         }
     });
-    await User.create(req.body, (err, user) => {
-        if (err) return next(err)
-        res.redirect("/users/login")
-    })
+    var user= await User.create(req.body);
+    console.log(user,"here")
+    var cart= await Cart.create({userId:user.id})
+    var newuser= await User.findByIdAndUpdate(user.id,{$addToSet:{cart:cart.id}});
+    console.log(newuser,"user",cart,"cart" )
+    res.redirect('/users/login')
 }
+
 
 exports.nodemailer = async (req, res) => {
     try {
-        var user = await User.findOne({ email: req.parama.email })
-        if (user.verification === req.body.verification) {
-            var updateUser = await User.findOneAndUpdate(
-                { email: req.parama.email },
-                { isVerified: true },
-                { new: true }
-            )
-            res.redirect("/home")
-        }
-        if (!user.verification === req.body.verification) {
-            res.send("not verified")
+        var user = await User.findById(req.params.email );
+        console.log(user,"ser is here");
+        if(user.verification == req.body.verification){
+            var update= await User.findByIdAndUpdate(user.id,{isVerified:true})
+            console.log(update,"here we ahe")
+            res.redirect('/users/shopping')
+        }else{
+            res.render('userVerify')
         }
     } catch (error) {
         next(error)
@@ -109,6 +109,10 @@ exports.logoutUser = (req, res, next) => {
 // shoping route
 exports.shopping = async (req, res, next) => {
     try {
+        console.log(req.user,"user")
+        if(!req.user.isVerified){
+            res.render('userVerify')
+        }
         var categories = await Category.find({});
         var allUsers = await User.find({});
         res.render("shopping", { categories, allUsers });

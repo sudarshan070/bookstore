@@ -12,6 +12,7 @@ var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
 
 
+
 var auth = require("./middleware/auth")
 require("dotenv").config()
 require("./moduls/passport")
@@ -53,12 +54,11 @@ app.use(
 
 app.use(passport.initialize())
 app.use(passport.session())
-
+app.use(auth.userInfo)
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin', adminRouter);
 
-app.use(auth.userInfo)
 
 
 // catch 404 and forward to error handler

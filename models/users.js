@@ -11,7 +11,7 @@ var userSchema = new Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        // unique: true
     },
     password: {
         type: String
@@ -19,6 +19,10 @@ var userSchema = new Schema({
     isAdmin: {
         type: Boolean,
         default: false
+    },
+    cart:{
+        type:Schema.Types.ObjectId,
+        ref:'Cart'
     },
     image: String,
     googleId: String,

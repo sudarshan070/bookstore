@@ -5,7 +5,7 @@ exports.logged = (req, res, next) => {
         console.log(req.session.userId)
         next()
     } else {
-        res.redirect("/home")
+        res.redirect("/users/login")
     }
 }
 
@@ -15,7 +15,7 @@ exports.userInfo = (req, res, next) => {
         req.session.userId = req.session.passport.user
         User.findById(
             req.session.userId,
-            { email: 1, name: 1, userId: 1, image: 1 },
+            { email: 1, name: 1, userId: 1, image: 1 ,isVerified:1},
             (err, user) => {
                 if (err) return next(err)
                 req.user = user
@@ -25,7 +25,7 @@ exports.userInfo = (req, res, next) => {
         )
     } else if (req.session.userId) {
         User.findById(req.session.userId,
-            { email: 1, name: 1, userId: 1, image: 1 },
+            { email: 1, name: 1, userId: 1, image: 1,isVerified:1 },
             (err, user) => {
                 if (err) return next(err)
                 req.user = user

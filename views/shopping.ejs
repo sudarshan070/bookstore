@@ -1,8 +1,8 @@
-<%- include("partials/header.ejs") -%>
+<%- include("partials/logoutHeader.ejs") -%>
 
 <h2>category</h2>
 <% categories.forEach( category => { %>
-<a href="#">
+<a href="/users/shopping/<%=category.name%>">
   <div class="card categoryCard" style="width: 18rem;">
     <img
       src="/images/<%= category.image%>"

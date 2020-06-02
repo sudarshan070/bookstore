@@ -59,7 +59,7 @@ exports.nodemailer = async (req, res) => {
     try {
         var user = await User.findOne({ email: req.parama.email })
         if (user.verification === req.body.verification) {
-            var updateUser = await User.updateOne(
+            var updateUser = await User.findOneAndUpdate(
                 { email: req.parama.email },
                 { isVerified: true },
                 { new: true }
@@ -99,13 +99,14 @@ exports.postLogin = (req, res, next) => {
 // logout user
 // change here delete user wikthout distroy session
 exports.logoutUser = (req, res, next) => {
-    req.session = null;
+    req.session.destroy()
+    // req.session = null;
+    console.log(req.session, "------------------")
     res.redirect("/home")
 }
 
 
-// shoping 
-
+// shoping route
 exports.shopping = async (req, res, next) => {
     try {
         var categories = await Category.find({});
@@ -114,4 +115,23 @@ exports.shopping = async (req, res, next) => {
     } catch (error) {
         next(error)
     }
+}
+
+
+// categoryWiseBooks
+exports.userSideBooks = (req, res, next) => {
+    Book.find({ category: req.params.name }, (err, books) => {
+        if (err) return next(err)
+        return res.render("userSideBooks", { books })
+    })
+}
+
+// book detail
+exports.singleBookDetail = (req, res, next) => {
+    Book.findById(req.params.id, (err, books) => {
+        if (err) return next(err)
+        res.render("singleBookDetail", { books })
+    })
+
+
 }

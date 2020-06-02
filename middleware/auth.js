@@ -2,7 +2,10 @@ var User = require("../models/users")
 
 exports.logged = (req, res, next) => {
     if (req.session.userId || req.session.passport) {
-        return next()
+        console.log(req.session.userId)
+        next()
+    } else {
+        res.redirect("/home")
     }
 }
 

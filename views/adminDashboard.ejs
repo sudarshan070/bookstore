@@ -68,28 +68,34 @@
       </button>
     </a>
 
-    <% categories.forEach( category => { %>
-    <a href="/admin/getCategory/<%=category.name%>">
-      <div class="card categoryCard" style="width: 18rem;">
-        <img
-          src="/images/<%= category.image%>"
-          class="card-img-top"
-          alt="bookCategory"
-        />
-        <div class="card-body">
-          <p class="card-text">
-            <%= category.name%>
-          </p>
+    <div class="flex-card">
+      <% categories.forEach( category => { %>
+
+      <a href="/admin/getCategory/<%=category.name%>">
+        <div class="card categoryCard" style="width: 18rem;">
+          <img
+            src="/images/<%= category.image%>"
+            class="card-img-top"
+            alt="bookCategory"
+          />
+          <div class="card-body">
+            <p class="card-text">
+              <%= category.name%>
+            </p>
+          </div>
+          <div class="flex-card">
+            <a href="/admin/<%=category.id %>/edit">
+              <button class="positive ui button">Edit</button>
+            </a>
+            <a href="/admin/<%=category.id %>/delete">
+              <button class="negative ui button">Delete</button>
+            </a>
+          </div>
         </div>
-        <a href="/admin/<%=category.id %>/edit">
-          <button class="positive ui button">Edit</button>
-        </a>
-        <a href="/admin/<%=category.id %>/delete">
-          <button class="negative ui button">Delete</button>
-        </a>
-      </div>
-    </a>
-    <% }) %>
+      </a>
+
+      <% }) %>
+    </div>
     <div>
       <% users.forEach( user => { %>
       <p><%=user.name%></p>

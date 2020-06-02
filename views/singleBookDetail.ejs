@@ -1,0 +1,15 @@
+<%- include("partials/logoutHeader.ejs") -%>
+<h2>WelCome Book Detail</h2>
+<p>titel: <%=books.title%></p>
+<p>author: <%=books.author%></p>
+<p>category: <%=books.category%></p>
+<p>detail: <%=books.detail%></p>
+<p>price: <%=books.price%></p>
+<p>publisher: <%=books.publisher%></p>
+<p>stock: <%=books.stock%></p>
+
+<a href="#">
+  <button>Add To Cart</button>
+</a>
+
+<img src="/images/<%= books.image%>" width="200px" />

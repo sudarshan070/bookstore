@@ -65,6 +65,7 @@ exports.deleteCategory = async (req, res, next) => {
 
 }
 
+// categorywise books
 exports.getCategoryWiseBook = (req, res, next) => {
     if (req.session) {
         Book.find({ category: req.params.name }, (err, books) => {

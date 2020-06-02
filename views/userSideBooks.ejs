@@ -1,8 +1,10 @@
-<%- include("partials/header.ejs") -%>
+<h3>Books</h3>
 
-<a href="/admin">
+<%- include("partials/logoutHeader.ejs") -%>
+
+<a href="/users/shopping">
   <button type="button" class="btn btn-primary mr-1 my-1">
-    Admin Home
+    Home
   </button>
 </a>
 
@@ -13,7 +15,7 @@
       <img src="/images/<%= books.image%>" />
     </div>
     <div class="content">
-      <a href="/admin/allBook/<%= books.id%>" class="header">
+      <a href="/users/shopping/bookDetail/<%= books.id%>" class="header">
         <%= books.title%>
       </a>
       <div class="meta">

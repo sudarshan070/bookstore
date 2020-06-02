@@ -3,6 +3,7 @@ var router = express.Router();
 var userController = require("../controller/users")
 var multer = require("multer")
 var path = require("path")
+var auth = require("../middleware/auth")
 
 // multer profile image add 
 var storage = multer.diskStorage({
@@ -39,11 +40,18 @@ router.post("/login", userController.postLogin)
 // logout user
 router.get("/logout", userController.logoutUser)
 
-
 // verify user
 router.post("/:email/verify", userController.nodemailer)
 
 // shoppig route
-router.get("/shopping", userController.shopping)
+router.get("/shopping", auth.logged, userController.shopping)
+
+// categorywiseBooks
+router.get('/shopping/:name', userController.userSideBooks)
+
+// book detail
+router.get("/shopping/bookDetail/:id", userController.singleBookDetail)
+
+
 
 module.exports = router;

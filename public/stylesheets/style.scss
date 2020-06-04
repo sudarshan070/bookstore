@@ -187,21 +187,127 @@ body {
 }
 
 // user home page
-.container {
-  width: 80%;
-  margin: 0 auto;
-}
-.userHome {
-  padding-top: 4rem;
-  h2 {
-    font-size: 44px;
-    color: #464444;
-    text-align: center;
-  }
-}
 .flex-card {
   display: flex;
   justify-content: space-around;
+}
+.home-hero {
+  height: 90vh;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(235, 247, 255, 0.698),
+      rgba(214, 239, 255, 0.671)
+    ),
+    url(../images/bg2.jpg);
+  background-size: cover;
+  background-position: top;
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% 91%, 0% 100%);
+}
+
+.text-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.heading-primary {
+  color: rgb(36, 35, 35);
+  text-transform: uppercase;
+  backface-visibility: hidden;
+  margin-bottom: 60px;
+  .heading-primary-main {
+    display: block;
+    font-weight: 400;
+    font-size: 40px;
+    letter-spacing: 10px;
+    line-height: 1.7;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+  }
+}
+
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  80% {
+    transform: translateX(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 40px;
+  display: inline-block;
+  border-radius: 100px;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.btn-white {
+  color: #777777;
+  background: #fff;
+  font-weight: 400;
+}
+
+.btn:hover {
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.btn-white::after {
+  background: #fff;
+}
+
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.btn-animated {
+  animation: moveInBottom 0.5s ease-out 0.75s;
+  animation-fill-mode: backwards;
 }
 
 // all form ======= alll form
@@ -230,6 +336,6 @@ body {
     }
   }
 }
-.choose-file{
+.choose-file {
   cursor: pointer;
 }

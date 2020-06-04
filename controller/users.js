@@ -3,7 +3,7 @@ var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 var Category = require("../models/category")
 var Book = require("../models/books");
-var Cart=require('../models/cart')
+var Cart = require('../models/cart')
 
 
 // get session 
@@ -24,7 +24,6 @@ exports.getRegister = (req, res, next) => {
 // post  register user
 exports.postRegister = async (req, res, next) => {
     req.body.image = req.file.originalname;
-
     var transporter = nodemailer.createTransport(smtpTransport({
         service: 'gmail',
         auth: {
@@ -32,8 +31,8 @@ exports.postRegister = async (req, res, next) => {
             pass: process.env.PASSWORDS
         }
     }));
-    var verification = Math.floor(Math.random()*1000000);
-    console.log(verification, "verification ------------ - -")
+    var verification = Math.floor(Math.random() * 1000000);
+
 
     var mailOptions = {
         from: process.env.EMAIL,
@@ -49,24 +48,24 @@ exports.postRegister = async (req, res, next) => {
             console.log('Email sent: ' + info.response);
         }
     });
-    var user= await User.create(req.body);
-    console.log(user,"here")
-    var cart= await Cart.create({userId:user.id})
-    var newuser= await User.findByIdAndUpdate(user.id,{$addToSet:{cart:cart.id}});
-    console.log(newuser,"user",cart,"cart" )
+    var user = await User.create(req.body);
+    console.log(user, "here")
+    var cart = await Cart.create({ userId: user.id })
+    var newuser = await User.findByIdAndUpdate(user.id, { $addToSet: { cart: cart.id } });
+    console.log(newuser, "user", cart, "cart")
     res.redirect('/users/login')
 }
 
 
 exports.nodemailer = async (req, res) => {
     try {
-        var user = await User.findById(req.params.email );
-        console.log(user,"ser is here");
-        if(user.verification == req.body.verification){
-            var update= await User.findByIdAndUpdate(user.id,{isVerified:true})
-            console.log(update,"here we ahe")
+        var user = await User.findById(req.params.email);
+        console.log(user, "ser is here");
+        if (user.verification == req.body.verification) {
+            var update = await User.findByIdAndUpdate(user.id, { isVerified: true })
+            console.log(update, "here we ahe")
             res.redirect('/users/shopping')
-        }else{
+        } else {
             res.render('userVerify')
         }
     } catch (error) {
@@ -100,17 +99,23 @@ exports.postLogin = (req, res, next) => {
 // change here delete user wikthout distroy session
 exports.logoutUser = (req, res, next) => {
     req.session.destroy()
-    // req.session = null;
-    console.log(req.session, "------------------")
     res.redirect("/home")
 }
 
 
+// get all books
+exports.getAllBook = (req, res, next) => {
+    Book.find({}).exec((err, books) => {
+        if (err) return next(err)
+        res.render("userAllbook", { books })
+    })
+}
+
 // shoping route
 exports.shopping = async (req, res, next) => {
     try {
-        console.log(req.user,"user")
-        if(!req.user.isVerified){
+        console.log(req.user, "user")
+        if (!req.user.isVerified) {
             res.render('userVerify')
         }
         var categories = await Category.find({});

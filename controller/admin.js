@@ -17,7 +17,6 @@ exports.getDashboard = async (req, res, next) => {
 
 // get CreateCategory
 exports.createCategory = (req, res, next) => {
-    console.log(req.session)
     if (req.session) {
         res.render("categoryForm");
     }

@@ -43,6 +43,9 @@ router.get("/logout", userController.logoutUser)
 // verify user
 router.post("/:email/verify", userController.nodemailer)
 
+// get all book
+router.get("/allbooks", auth.logged, userController.getAllBook)
+
 // shoppig route
 router.get("/shopping", auth.logged, userController.shopping)
 

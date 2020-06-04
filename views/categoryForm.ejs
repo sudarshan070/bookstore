@@ -1,11 +1,21 @@
-<%- include("partials/header.ejs") -%>
+<%- include("partials/logoutHeader.ejs") -%>
 
-<form
-  action="/admin/createCategory"
-  method="POST"
-  enctype="multipart/form-data"
->
-  <input type="text" name="name" placeholder="Name" />
-  <input type="file" name="image" />
-  <input type="submit" value="Add" />
-</form>
+<div class="form-container">
+  <div class="form-heading">
+    <h2>Create Catrgory</h2>
+  </div>
+  <form
+    class="ui form"
+    action="/admin/createCategory"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="field">
+      <input type="text" name="name" placeholder="Name" />
+    </div>
+    <div class="field">
+      <input class="choose-file" type="file" name="image" />
+    </div>
+    <input class="ui button" type="submit" value="Add" />
+  </form>
+</div>

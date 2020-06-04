@@ -1,9 +1,35 @@
 <%- include("partials/header.ejs") -%>
 
-<form action="/users/register" method="POST" enctype="multipart/form-data">
-  <input type="text" name="name" placeholder="Name" />
-  <input type="email" name="email" placeholder="Email" />
-  <input type="password" name="password" placeholder="Password" />
-  <input type="file" name="image" />
-  <input type="submit" value="Sign Up" />
-</form>
+<div class="form-container">
+  <div class="form-heading">
+    <h2>Register Form</h2>
+  </div>
+  <form
+    class="ui form"
+    action="/users/register"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="field">
+      <input type="text" name="name" placeholder="Name" />
+    </div>
+
+    <div class="field">
+      <input type="email" name="email" placeholder="Email" />
+    </div>
+
+    <div class="field">
+      <input type="password" name="password" placeholder="Password" />
+    </div>
+
+    <div class="field">
+      <input class="choose-file" type="file" name="image" />
+    </div>
+
+    <input class="ui button" type="submit" value="Sign Up" />
+  </form>
+  <div class="form-footer">
+    <h3>Already Sign Up</h3>
+    <a href="/users/login">Sign In</a>
+  </div>
+</div>

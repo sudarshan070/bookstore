@@ -1,13 +1,28 @@
-<%- include("partials/header.ejs") -%>
+<%- include("partials/logoutHeader.ejs") -%>
 
-<form action="/admin/<%=category.id %>/edit" method="POST" enctype="multipart/form-data">
-  <input type="text" name="name" value="<%= category.name%>" />
-  <input type="file" value="<%= category.image%>">
-  <input type="submit" value="Add" />
-</form>
-
-<a href="/admin">
-  <button type="button" class="btn btn-primary mr-1 my-1">
-    Admin Home
-  </button>
-</a>
+<div class="form-container">
+  <a href="/admin">
+    <button type="button" class="btn btn-primary mr-1 my-1">
+      Admin Home
+    </button>
+  </a>
+  <div class="form-heading">
+    <h2>Register Form</h2>
+  </div>
+  <form
+    class="ui form"
+    action="/admin/<%=category.id %>/edit"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+  <div class="field">
+    <input type="text" name="name" value="<%= category.name%>" />
+  </div>
+    
+    <div class="field">
+      <input class="choose-file" type="file" value="<%= category.image%>" />
+    </div>
+    
+    <input class="ui button" type="submit" value="Add" />
+  </form>
+</div>

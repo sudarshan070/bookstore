@@ -1,27 +1,56 @@
-<%- include("partials/header.ejs") -%>
-<form
-  action="/admin/allBook/<%= books.id%>/edit"
-  method="POST"
-  enctype="multipart/form-data"
->
-  <input type="text" name="author" value="<%= books.author%>" />
-  <input type="text" name="title" value="<%= books.title%>" />
-  <select name="category">
-    <option name="" value="0">Select category</option>
-    <% categories.forEach( category => { %>
-    <option value="<%=category.name%>"><%=category.name%></option>
-    <% })%>
-  </select>
-  <input type="text" name="detail" value="<%= books.detail%>" />
-  <input type="text" name="price" value="<%= books.price%>" />
-  <input type="text" name="publisher" value="<%= books.publisher%>" />
-  <input type="text" name="stock" value="<%= books.stock%>" />
-  <input type="file" name="image" value="<%= books.image%>" />
-  <input type="submit" value="Add Book" />
-</form>
+<%- include("partials/logoutHeader.ejs") -%>
 
-<a href="/admin">
-  <button type="button" class="btn btn-primary mr-1 my-1">
-    Admin Home
-  </button>
-</a>
+<div class="form-container">
+  <a href="/admin">
+    <button type="button" class="btn btn-primary mr-1 my-1">
+      Admin Home
+    </button>
+  </a>
+  <div class="form-heading">
+    <h2>Register Form</h2>
+  </div>
+  <form
+    class="ui form"
+    action="/admin/allBook/<%= books.id%>/edit"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+  <div class="field">
+    <input type="text" name="author" value="<%= books.author%>" />
+  </div>
+   
+    <div class="field">
+      <input type="text" name="title" value="<%= books.title%>" />
+    </div>
+    
+    <div class="field">
+    <select name="category">
+      <option name="" value="0">Select category</option>
+      <% categories.forEach( category => { %>
+      <option value="<%=category.name%>"><%=category.name%></option>
+      <% })%>
+    </select>
+  </div>
+    <div class="field">
+      <input type="text" name="detail" value="<%= books.detail%>" />
+    </div>
+    
+    <div class="field">
+      <input type="text" name="price" value="<%= books.price%>" />
+    </div>
+    
+    <div class="field">
+      <input type="text" name="publisher" value="<%= books.publisher%>" />
+    </div>
+    
+    <div class="field">
+      <input type="text" name="stock" value="<%= books.stock%>" />
+    </div>
+    
+    <div class="field">
+      <input class="choose-file" type="file" name="image" value="<%= books.image%>" />
+    </div>
+    
+    <input class="ui button" type="submit" value="Add Book" />
+  </form>
+</div>

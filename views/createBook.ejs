@@ -1,23 +1,44 @@
-<%- include("partials/header.ejs") -%>
-<form action="" method="POST" enctype="multipart/form-data">
-  <input type="text" name="title" placeholder="Title" />
-  <input type="text" name="author" placeholder="Author" />
-  <select name="category">
-    <option name="" value="0">Select category</option>
-    <% categories.forEach( category => { %>
-    <option value="<%=category.name%>"><%=category.name%></option>
-    <% })%>
-  </select>
-  <input type="text" name="detail" placeholder="Detail" />
-  <input type="text" name="price" placeholder="Price" />
-  <input type="text" name="publisher" placeholder="Publisher" />
-  <input type="text" name="stock" placeholder="Stock" />
-  <input type="file" name="image" />
-  <input type="submit" value="Add Book" />
-</form>
+<%- include("partials/logoutHeader.ejs") -%>
 
-<a href="/admin">
-  <button type="button" class="btn btn-primary mr-1 my-1">
-    Admin Home
-  </button>
-</a>
+<div class="form-container">
+  <a href="/admin">
+    <button type="button" class="btn btn-primary mr-1 my-1">
+      Admin Home
+    </button>
+  </a>
+  <div class="form-heading">
+    <h2>Create Book</h2>
+  </div>
+  <form class="ui form" action="" method="POST" enctype="multipart/form-data">
+    <div class="field">
+      <input type="text" name="title" placeholder="Title" />
+    </div>
+    <div class="field">
+      <input type="text" name="author" placeholder="Author" />
+    </div>
+    <div class="field">
+      <select name="category">
+        <option name="" value="0">Select category</option>
+        <% categories.forEach( category => { %>
+        <option value="<%=category.name%>"><%=category.name%></option>
+        <% })%>
+      </select>
+    </div>
+    <div class="field">
+      <input type="text" name="detail" placeholder="Detail" />
+    </div>
+    <div class="field">
+      <input type="text" name="price" placeholder="Price" />
+    </div>
+    <div class="field">
+      <input type="text" name="publisher" placeholder="Publisher" />
+    </div>
+    <div class="field">
+      <input type="text" name="stock" placeholder="Stock" />
+    </div>
+    <div class="field">
+      <input class="choose-file" type="file" name="image" />
+    </div>
+    <input class="ui button" type="submit" value="Add Book" />
+  </form>
+</div>

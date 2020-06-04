@@ -1,6 +1,14 @@
-<%- include("partials/header.ejs") -%>
+<%- include("partials/logoutHeader.ejs") -%>
 
-<form action="/users/<%=userInfo.id%>/verify" method="post">
-  <input type="text" name="verification" placeholder="Enter verify code " />
-  <input type="submit" value="submit" />
-</form>
+<div class="form-container">
+  <div class="form-heading">
+    <h2>Enter Verification code</h2>
+  </div>
+  <form class="ui form" action="/users/<%=userInfo.id%>/verify" method="post">
+    <div class="field">
+      <input type="text" name="verification" placeholder="Enter verify code " />
+    </div>
+
+    <input class="ui button" type="submit" value="submit" />
+  </form>
+</div>

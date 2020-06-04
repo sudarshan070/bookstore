@@ -136,6 +136,8 @@ table {
 }
 body {
   font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 // header =========================
@@ -200,4 +202,34 @@ body {
 .flex-card {
   display: flex;
   justify-content: space-around;
+}
+
+// all form ======= alll form
+.form-container {
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 5rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  padding: 3rem 2rem;
+  .form-heading {
+    color: #157af6;
+    text-align: center;
+    padding-bottom: 24px;
+    h2 {
+      font-size: 26px;
+    }
+  }
+  .form-footer {
+    padding-top: 24px;
+    text-align: center;
+    h3 {
+      font-size: 22px;
+    }
+    a {
+      font-size: 20px;
+    }
+  }
+}
+.choose-file{
+  cursor: pointer;
 }

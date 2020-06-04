@@ -64,7 +64,7 @@ exports.nodemailer = async (req, res) => {
         if (user.verification == req.body.verification) {
             var update = await User.findByIdAndUpdate(user.id, { isVerified: true })
             console.log(update, "here we ahe")
-            res.redirect('/users/shopping')
+            res.redirect('/users/allbooks')
         } else {
             res.render('userVerify')
         }
@@ -91,7 +91,7 @@ exports.postLogin = (req, res, next) => {
             return res.redirect("/users/login")
         }
         req.session.userId = user.id
-        res.redirect("/users/shopping")
+        res.redirect("/users/allbooks")
     })
 }
 
@@ -104,11 +104,17 @@ exports.logoutUser = (req, res, next) => {
 
 
 // get all books
-exports.getAllBook = (req, res, next) => {
-    Book.find({}).exec((err, books) => {
-        if (err) return next(err)
+exports.getAllBook = async (req, res, next) => {
+    try {
+        if (!req.user.isVerified) {
+            res.render('userVerify')
+        }
+        var books = await Book.find({})
         res.render("userAllbook", { books })
-    })
+    } catch (error) {
+        next(error)
+    }
+
 }
 
 // shoping route
@@ -141,6 +147,4 @@ exports.singleBookDetail = (req, res, next) => {
         if (err) return next(err)
         res.render("singleBookDetail", { books })
     })
-
-
 }

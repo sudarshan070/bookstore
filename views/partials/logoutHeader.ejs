@@ -50,21 +50,30 @@
               ></a>
               <div class="sub-menu-box">
                 <ul class="sub-menu">
-                 
-                    <% categories.forEach( category => { %>
-                    <a href="/users/shopping/<%=category.name%>"
-                      ><li><%=category.name%></li></a
-                    >
-                    <% })%>
-                 
+                  <% categories.forEach( category => { %>
+                  <a href="/users/shopping/<%=category.name%>"
+                    ><li><%=category.name%></li></a
+                  >
+                  <% })%>
                 </ul>
               </div>
             </li>
 
             <div class="userName">
+              <i class="userHeader user circle outline icon"></i>
               <p><%= userName%></p>
             </div>
 
+            <div class="userName">
+              <a href="/mycart">
+                <div class="ui vertical animated button" tabindex="0">
+                  <div class="hidden content">Go Cart</div>
+                  <div class="visible content">
+                    <i class="shop icon"></i>
+                  </div>
+                </div>
+              </a>
+            </div>
             <div>
               <a href="/users/logout">
                 <button type="button" class="btn btn-primary mr-1 my-1">

@@ -99,7 +99,7 @@ exports.postLogin = (req, res, next) => {
 // logout user
 // change here delete user wikthout distroy session
 exports.logoutUser = (req, res, next) => {
-    req.session.destroy()
+    req.session.destroy();
     res.redirect("/home")
 }
 
@@ -112,10 +112,12 @@ exports.getAllBook = async (req, res, next) => {
         if (!req.user.isVerified) {
             res.render('userVerify')
         }
+        var cart = await Cart.findOne({ userId: req.user.id });
+        var booklist = await Booklist.find({ cart: cart.id })
         var userName = req.user.name
         var categories = await Category.find({})
         var books = await Book.find({})
-        res.render("userAllbook", { books, categories, userName })
+        res.render("userAllbook", { books, categories, userName, booklist })
     } catch (error) {
         next(error)
     }
@@ -125,14 +127,15 @@ exports.getAllBook = async (req, res, next) => {
 // shoping route
 exports.shopping = async (req, res, next) => {
     try {
-        console.log(req.user, "user")
         if (!req.user.isVerified) {
             res.render('userVerify')
         }
         var userName = req.user.name
+        var cart = await Cart.findOne({ userId: req.user.id });
+        var booklist = await Booklist.find({ cart: cart.id })
         var categories = await Category.find({});
         var allUsers = await User.find({});
-        res.render("shopping", { categories, allUsers,userName });
+        res.render("shopping", { categories, allUsers, userName, booklist });
     } catch (error) {
         next(error)
     }
@@ -142,10 +145,12 @@ exports.shopping = async (req, res, next) => {
 // categoryWiseBooks
 exports.userSideBooks = async (req, res, next) => {
     try {
+        var cart = await Cart.findOne({ userId: req.user.id });
+        var booklist = await Booklist.find({ cart: cart.id })
         var userName = req.user.name
         var categories = await Category.find({});
         var books = await Book.find({ category: req.params.name })
-        res.render("userSideBooks", { books, categories,userName })
+        res.render("userSideBooks", { books, categories, userName, booklist })
     } catch (error) {
         next(error)
     }
@@ -154,13 +159,13 @@ exports.userSideBooks = async (req, res, next) => {
 // book detail
 exports.singleBookDetail = async (req, res, next) => {
     try {
+        var cart = await Cart.findOne({ userId: req.user.id });
+        var booklist = await Booklist.find({ cart: cart.id })
         var userName = req.user.name
         var books = await Book.findById(req.params.id)
         var categories = await Category.find({});
-        res.render("singleBookDetail", { books, categories,userName })
+        res.render("singleBookDetail", { books, categories, userName, booklist })
     } catch (error) {
         next(error)
     }
-
-
 }

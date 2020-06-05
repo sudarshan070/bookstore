@@ -2,11 +2,11 @@
 
 <%- include("partials/logoutHeader.ejs") -%>
 
-<div class="flex-card">
+<div class="allbookFlex">
   <% books.filter(books =>{%>
   <div class="ui card">
     <div class="image">
-      <img src="/images/<%= books.image%>" />
+      <img src="/images/<%= books.image%>"  width="200px"/>
     </div>
     <div class="content">
       <a href="/users/shopping/bookDetail/<%= books.id%>" class="header">

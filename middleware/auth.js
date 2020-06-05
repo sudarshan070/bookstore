@@ -12,10 +12,11 @@ exports.logged = (req, res, next) => {
 
 exports.userInfo = (req, res, next) => {
     if (req.session.passport) {
-        req.session.userId = req.session.passport.user
+        req.session.userId = req.session.passport.user;
+        req.session.userName = req.session.passport.user.name || "";
         User.findById(
             req.session.userId,
-            { email: 1, name: 1, userId: 1, image: 1 ,isVerified:1},
+            { email: 1, name: 1, userId: 1, image: 1, isVerified: 1 },
             (err, user) => {
                 if (err) return next(err)
                 req.user = user
@@ -24,13 +25,14 @@ exports.userInfo = (req, res, next) => {
             }
         )
     } else if (req.session.userId) {
+      
         User.findById(req.session.userId,
-            { email: 1, name: 1, userId: 1, image: 1,isVerified:1 },
+            { email: 1, name: 1, userId: 1, image: 1, isVerified: 1 },
             (err, user) => {
-                if (err) return next(err)
+                if (err) return next(err);
                 req.user = user
                 res.locals.userInfo = user
-                next()
+                next();
             }
         )
     } else {

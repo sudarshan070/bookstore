@@ -11,8 +11,6 @@
       rel="stylesheet"
     />
 
-   
-
     <script
       src="https://kit.fontawesome.com/a548432773.js"
       crossorigin="anonymous"
@@ -34,23 +32,25 @@
           </div>
           <div class="flex">
             <div>
+              <% if (!status) {%>
               <a href="/users/login">
                 <button type="button" class="btn btn-primary mr-1 my-1">
                   Login
                 </button>
               </a>
-
+              <%}%> <% if (!status) {%>
               <a href="/users/register">
                 <button type="button" class="btn btn-primary mr-1 my-1">
                   Signup
                 </button>
               </a>
-
+              <%}%> <% if (!status) {%>
               <a href="/auth/google">
                 <button type="button" class="btn btn-primary mr-1 my-1">
                   Admin Login
                 </button>
               </a>
+              <%}%>
             </div>
           </div>
         </div>
@@ -66,7 +66,7 @@
             Shopping</a
           >
         </div>
-      </section>  
+      </section>
     </main>
   </body>
 </html>

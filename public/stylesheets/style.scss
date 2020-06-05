@@ -200,7 +200,7 @@ ul {
 }
 
 .sub-menu {
-  background: #ccc;
+  background: #E0E1E2;
   padding: 12px 32px;
   text-align: center;
   border-radius: 3px;
@@ -228,6 +228,15 @@ ul {
 
 .userName {
   margin-right: 24px;
+  display: flex;
+
+  p {
+    font-size: 16px;
+    font-weight: 600;
+  }
+ .userHeader  {
+    font-size: 16px;
+  }
 }
 // user home page
 .flex-card {
@@ -381,4 +390,24 @@ ul {
 }
 .choose-file {
   cursor: pointer;
+}
+
+// single book detail
+.bookDetailheading {
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+  font-size: 28px;
+  color: #157af6;
+  text-align: center;
+}
+.bookdetailflex {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4rem;
+  .rightbookdetail {
+    width: 40%;
+  }
+  .leftbookdetail {
+    width: 40%;
+  }
 }

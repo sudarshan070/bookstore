@@ -1,22 +1,31 @@
 <%- include("partials/logoutHeader.ejs") -%>
 
+<div class="container">
+  <div class="bookDetailheading"><h2>My Cart</h2></div>
+
 <div>
   <% total = 0%> <% sum = 0%>
 </div>
 
 <% booklist.forEach (book =>{ %>
-<p><%= book.qty%></p>
-<p><%= book.book.title%></p>
-<p><%= book.book.author%></p>
-<p><%= book.book.category%></p>
-<p><%= book.book.price%></p>
+  <div class="bookdetailflex">
+
+<p>Book Quentity: <%= book.qty%></p>
+<p> Title:<%= book.book.title%></p>
+<p>Author:<%= book.book.author%></p>
+<p>Category:<%= book.book.category%></p>
+<p>Price:<%= book.book.price%></p>
 <%sub = (book.qty*book.book.price) %>
 <p>Product Total:<%= sub%></p>
 <img src="/images/<%= book.book.image%>" height="200px" />
 
-<%total = sub + total%> <%if(total > 0){%>
-<p>Total : <%= total%></p>
-<% } %>
+
 
 <%})%>
 
+<%total = sub + total%> <%if(total > 0){%>
+  <p>Grand Total : <%= total%></p>
+  <% } %>
+
+  </div>
+</div>

@@ -1,25 +1,28 @@
 <%- include("partials/logoutHeader.ejs") -%>
-<a href="/mycart"
-  ><div class="ui vertical animated button" tabindex="0">
-    <div class="hidden content">Shop</div>
-    <div class="visible content">
-      <i class="shop icon"></i>
-    </div></div
-></a>
 
-<h2>WelCome Book Detail</h2>
-<p>Titel: <%=books.title%></p>
-<p>Author: <%=books.author%></p>
-<p>Category: <%=books.category%></p>
-<p>Detail: <%=books.detail%></p>
-<p>Price: <%=books.price%></p>
-<p>Publisher: <%=books.publisher%></p>
-<p>Stock: <%=books.stock%></p>
+<div class="container">
+  <div class="bookDetailheading"><h2>Book Detail</h2></div>
+ 
+  <div class="bookdetailflex">
+    <div class="leftbookdetail">
+      <p>Titel: <%=books.title%></p>
+      <p>Author: <%=books.author%></p>
+      <p>Category: <%=books.category%></p>
+      <p>Detail: <%=books.detail%></p>
+    </div>
+    <div class="rightbookdetail">
+      <p>Price: <%=books.price%></p>
+      <p>Publisher: <%=books.publisher%></p>
+      <p>Stock: <%=books.stock%></p>
+      <form action="/add/<%= books.id%>" method="POST">
+        <input type="number" name="qty" />
 
-<form action="/add/<%= books.id%>" method="POST">
-  <input type="number" name="qty" />
+        <button type="submit">Add to Cart</button>
+      </form>
+    </div>
+  </div>
 
-  <button type="submit">Add to Cart</button>
-</form>
-
-<img src="/images/<%= books.image%>" width="200px" />
+  <div class="bookdetailflex">
+    <img src="/images/<%= books.image%>" width="150px" />
+  </div>
+</div>

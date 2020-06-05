@@ -7,8 +7,13 @@ var Booklist = require("../models/booklist")
 // home page
 exports.homePage = async (req, res, next) => {
     try {
+        var status = false;
+        if (req.session.userId) {
+            status = true;
+        }
+        // var userName = req.user.name;
         var categories = await Category.find({});
-        res.render("home", { categories })
+        res.render("home", { categories, status })
     } catch (error) {
         next(error)
     }
@@ -26,7 +31,11 @@ exports.addToCart = async (req, res, next) => {
         var booklist = await Booklist.findOne({ book: book.id })
         var booklist2 = await Booklist.findOne({ cart: cart.id })
         if (booklist && booklist2) {
-            var booklist = await Booklist.findByIdAndUpdate(booklist.id, { $inc: { qty: req.body.qty } }, { new: true });
+            var booklist = await Booklist.findByIdAndUpdate(
+                booklist.id,
+                { $inc: { qty: req.body.qty } },
+                { new: true }
+            );
         } else if (!booklist2 && !booklist) {
             req.body.book = book.id;
             req.body.cart = cart.id
@@ -58,7 +67,7 @@ exports.myCart = async (req, res, next) => {
                 path: "book",
                 select: "title author category price image"
             })
-        res.render('myCart', { booklist,userName, categories })
+        res.render('myCart', { booklist, userName, categories })
     } catch (error) {
         next(error)
     }

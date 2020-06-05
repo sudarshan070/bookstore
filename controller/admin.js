@@ -28,11 +28,8 @@ exports.getUsers = async (req, res, next) => {
 // get CreateCategory
 exports.createCategory =  async(req, res, next) => {
 try {
-    var userName = req.user.name
         var categories = await Category.find({});
-        res.render("categoryForm", userName, categories);
-
-    
+        res.render("categoryForm",  categories); 
 } catch (error) {
     next(error)
 }

@@ -14,9 +14,11 @@ router.get('/', function (req, res, next) {
   res.redirect("/home");
 });
 
-router.get("/home", (req, res, next) => {
-  res.render("home")
-})
+// home page
+router.get("/home", indexController.homePage)
+
+
+
 
 // google auth route
 router.get('/auth/google',

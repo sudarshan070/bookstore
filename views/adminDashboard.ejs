@@ -67,6 +67,11 @@
         Create Books
       </button>
     </a>
+    <a href="/admin/users">
+      <button type="button" class="btn btn-primary mr-1 my-1">
+        Users
+      </button>
+    </a>
 
     <div class="flex-card">
       <% categories.forEach( category => { %>
@@ -96,10 +101,6 @@
 
       <% }) %>
     </div>
-    <div>
-      <% users.forEach( user => { %>
-      <p><%=user.name%></p>
-      <% }) %>
-    </div>
+   
   </body>
 </html>

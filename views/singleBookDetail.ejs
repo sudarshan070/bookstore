@@ -1,17 +1,24 @@
 <%- include("partials/logoutHeader.ejs") -%>
-<a href="/mycart">My cart</a>
+<a href="/mycart"
+  ><div class="ui vertical animated button" tabindex="0">
+    <div class="hidden content">Shop</div>
+    <div class="visible content">
+      <i class="shop icon"></i>
+    </div></div
+></a>
 
 <h2>WelCome Book Detail</h2>
-<p>titel: <%=books.title%></p>
-<p>author: <%=books.author%></p>
-<p>category: <%=books.category%></p>
-<p>detail: <%=books.detail%></p>
-<p>price: <%=books.price%></p>
-<p>publisher: <%=books.publisher%></p>
-<p>stock: <%=books.stock%></p>
+<p>Titel: <%=books.title%></p>
+<p>Author: <%=books.author%></p>
+<p>Category: <%=books.category%></p>
+<p>Detail: <%=books.detail%></p>
+<p>Price: <%=books.price%></p>
+<p>Publisher: <%=books.publisher%></p>
+<p>Stock: <%=books.stock%></p>
 
 <form action="/add/<%= books.id%>" method="POST">
   <input type="number" name="qty" />
+
   <button type="submit">Add to Cart</button>
 </form>
 

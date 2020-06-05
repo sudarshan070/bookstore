@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BookStore</title>
+    <title>BookStore | Admin</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <script
       src="https://kit.fontawesome.com/a548432773.js"
@@ -44,26 +44,11 @@
               <i class="search-icon fas fa-search"></i>
             </div>
 
-            <li class="nav-sub-menu">
-              <a class="down-icon" href="#"
-                >Select category <i class="fas-menu fas fa-angle-down"></i
-              ></a>
-              <div class="sub-menu-box">
-                <ul class="sub-menu">
-                 
-                    <% categories.forEach( category => { %>
-                    <a href="/users/shopping/<%=category.name%>"
-                      ><li><%=category.name%></li></a
-                    >
-                    <% })%>
-                 
-                </ul>
-              </div>
-            </li>
-
-            <div class="userName">
-              <p><%= userName%></p>
-            </div>
+            <a href="/admin">
+              <button type="button" class="btn btn-primary mr-1 my-1">
+                Admin Home
+              </button>
+            </a>
 
             <div>
               <a href="/users/logout">

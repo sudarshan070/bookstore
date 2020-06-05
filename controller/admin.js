@@ -15,11 +15,29 @@ exports.getDashboard = async (req, res, next) => {
     }
 }
 
-// get CreateCategory
-exports.createCategory = (req, res, next) => {
-    if (req.session) {
-        res.render("categoryForm");
+exports.getUsers = async (req, res, next) => {
+    try {
+        var allUsers = await User.find({})
+        var users = allUsers.filter(user => !user.isAdmin)
+        res.render("allUsers", { users });
+    } catch (error) {
+        next(error)
     }
+}
+
+// get CreateCategory
+exports.createCategory =  async(req, res, next) => {
+try {
+    var userName = req.user.name
+        var categories = await Category.find({});
+        res.render("categoryForm", userName, categories);
+
+    
+} catch (error) {
+    next(error)
+}
+
+    
 }
 
 // post createCategory

@@ -4,6 +4,7 @@ var smtpTransport = require('nodemailer-smtp-transport');
 var Category = require("../models/category")
 var Book = require("../models/books");
 var Cart = require('../models/cart')
+var Booklist = require("../models/booklist")
 
 
 // get session 
@@ -103,14 +104,18 @@ exports.logoutUser = (req, res, next) => {
 }
 
 
+
+
 // get all books
 exports.getAllBook = async (req, res, next) => {
     try {
         if (!req.user.isVerified) {
             res.render('userVerify')
         }
+        var userName = req.user.name
+        var categories = await Category.find({})
         var books = await Book.find({})
-        res.render("userAllbook", { books })
+        res.render("userAllbook", { books, categories, userName })
     } catch (error) {
         next(error)
     }
@@ -124,9 +129,10 @@ exports.shopping = async (req, res, next) => {
         if (!req.user.isVerified) {
             res.render('userVerify')
         }
+        var userName = req.user.name
         var categories = await Category.find({});
         var allUsers = await User.find({});
-        res.render("shopping", { categories, allUsers });
+        res.render("shopping", { categories, allUsers,userName });
     } catch (error) {
         next(error)
     }
@@ -134,17 +140,27 @@ exports.shopping = async (req, res, next) => {
 
 
 // categoryWiseBooks
-exports.userSideBooks = (req, res, next) => {
-    Book.find({ category: req.params.name }, (err, books) => {
-        if (err) return next(err)
-        return res.render("userSideBooks", { books })
-    })
+exports.userSideBooks = async (req, res, next) => {
+    try {
+        var userName = req.user.name
+        var categories = await Category.find({});
+        var books = await Book.find({ category: req.params.name })
+        res.render("userSideBooks", { books, categories,userName })
+    } catch (error) {
+        next(error)
+    }
 }
 
 // book detail
-exports.singleBookDetail = (req, res, next) => {
-    Book.findById(req.params.id, (err, books) => {
-        if (err) return next(err)
-        res.render("singleBookDetail", { books })
-    })
+exports.singleBookDetail = async (req, res, next) => {
+    try {
+        var userName = req.user.name
+        var books = await Book.findById(req.params.id)
+        var categories = await Category.find({});
+        res.render("singleBookDetail", { books, categories,userName })
+    } catch (error) {
+        next(error)
+    }
+
+
 }

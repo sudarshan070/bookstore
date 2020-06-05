@@ -1,6 +1,20 @@
 
 var Book = require("../models/books");
 var Cart = require('../models/cart')
+var Category = require("../models/category")
+var Booklist = require("../models/booklist")
+
+// home page
+exports.homePage = async (req, res, next) => {
+    try {
+        var categories = await Category.find({});
+        res.render("home", { categories })
+    } catch (error) {
+        next(error)
+    }
+
+}
+
 
 
 
@@ -36,14 +50,17 @@ exports.addToCart = async (req, res, next) => {
 //   my cart
 exports.myCart = async (req, res, next) => {
     try {
+        var userName = req.user.name
+        var categories = await Category.find({});
         var cart = await Cart.findOne({ userId: req.user.id });
         var booklist = await Booklist.find({ cart: cart.id })
             .populate({
                 path: "book",
                 select: "title author category price image"
             })
-        res.render('myCart', { booklist })
+        res.render('myCart', { booklist,userName, categories })
     } catch (error) {
         next(error)
     }
 }
+

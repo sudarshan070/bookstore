@@ -18,7 +18,8 @@ var upload = multer({ storage: storage })
 
 
 
-
+// Headers
+// router.get("/allboks", userController.header)
 
 /* GET users listing. */
 router.get("/", userController.getSession);

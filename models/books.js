@@ -20,6 +20,10 @@ var bookSchema = new Schema({
     price: String,
     publisher: String,
     stock: String,
+    reviews: [{
+        type: Schema.Types.ObjectId,
+        ref: "Review"
+    }],
     userId: {
         type: Schema.Types.ObjectId,
         ref: "User"

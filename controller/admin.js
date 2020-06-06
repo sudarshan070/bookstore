@@ -26,15 +26,13 @@ exports.getUsers = async (req, res, next) => {
 }
 
 // get CreateCategory
-exports.createCategory =  async(req, res, next) => {
-try {
+exports.createCategory = async (req, res, next) => {
+    try {
         var categories = await Category.find({});
-        res.render("categoryForm",  categories); 
-} catch (error) {
-    next(error)
-}
-
-    
+        res.render("categoryForm", categories);
+    } catch (error) {
+        next(error)
+    }
 }
 
 // post createCategory
@@ -76,7 +74,6 @@ exports.deleteCategory = async (req, res, next) => {
     } catch (error) {
         next(error)
     }
-
 }
 
 // categorywise books
@@ -142,7 +139,7 @@ exports.getEditBook = async (req, res, next) => {
 exports.postEditBook = async (req, res, next) => {
     try {
         var books = await Book.findByIdAndUpdate(req.params.id, req.body)
-        res.redirect("/admin/allBook")
+        res.redirect("/admin/allBook/")
     } catch (error) {
         next(error)
     }

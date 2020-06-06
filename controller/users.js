@@ -61,12 +61,13 @@ exports.postRegister = async (req, res, next) => {
 exports.nodemailer = async (req, res) => {
     try {
         var user = await User.findById(req.params.email);
-        console.log(user, "ser is here");
+       
         if (user.verification == req.body.verification) {
             var update = await User.findByIdAndUpdate(user.id, { isVerified: true })
             console.log(update, "here we ahe")
             res.redirect('/users/allbooks')
         } else {
+            
             res.render('userVerify')
         }
     } catch (error) {
@@ -91,6 +92,11 @@ exports.postLogin = (req, res, next) => {
         if (!user.verifyPassword(password)) {
             return res.redirect("/users/login")
         }
+        if(user.isblock){
+            console.log("here w are")
+            return res.redirect('/users/login')
+        }
+
         req.session.userId = user.id
         res.redirect("/users/allbooks")
     })
@@ -162,7 +168,7 @@ exports.singleBookDetail = async (req, res, next) => {
         var cart = await Cart.findOne({ userId: req.user.id });
         var booklist = await Booklist.find({ cart: cart.id })
         var userName = req.user.name
-        var books = await Book.findById(req.params.id)
+        var books = await Book.findById(req.params.id).populate("reviews");
         var categories = await Category.find({});
         res.render("singleBookDetail", { books, categories, userName, booklist })
     } catch (error) {

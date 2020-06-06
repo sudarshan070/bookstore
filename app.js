@@ -58,7 +58,7 @@ app.use(passport.session())
 app.use(auth.userInfo)
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/admin', adminRouter);
+app.use('/admin',auth.logged, adminRouter);
 
 
 

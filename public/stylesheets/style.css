@@ -227,7 +227,7 @@ ul {
 }
 
 .sub-menu {
-  background: #E0E1E2;
+  background: #e0e1e2;
   padding: 12px 32px;
   text-align: center;
   border-radius: 3px;
@@ -500,6 +500,8 @@ ul {
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin-top: 4rem;
+  padding-bottom: 3rem;
+  border-bottom: 2px solid #e0e1e2;
 }
 
 .bookdetailflex .rightbookdetail {
@@ -508,5 +510,38 @@ ul {
 
 .bookdetailflex .leftbookdetail {
   width: 40%;
+}
+
+.bookReviews {
+  padding-top: 2rem;
+}
+
+.bookReviews .borderbottom {
+  border-bottom: 1px solid #e0e1e2;
+  padding-bottom: 24px;
+}
+
+.bookReviews .borderbottom .bookReviewsFlex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-bottom: 24px;
+}
+
+.bookReviews .borderbottom .bookReviewsFlex a {
+  margin-left: 7rem;
+}
+
+.bookReviews .borderbottom .reviewInput {
+  width: 70%;
+  margin: 0 auto;
+  padding: 5px 12px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.reviewbox {
+  border-bottom: 1px solid #ccc;
 }
 /*# sourceMappingURL=style.css.map */

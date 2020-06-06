@@ -1,14 +1,62 @@
-<%- include("partials/logoutHeader.ejs") -%>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookStore</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script
+      src="https://kit.fontawesome.com/a548432773.js"
+      crossorigin="anonymous"
+    ></script>
 
-<div class="form-container">
-  <div class="form-heading">
-    <h2>Enter Verification code</h2>
-  </div>
-  <form class="ui form" action="/users/<%=userInfo.id%>/verify" method="post">
-    <div class="field">
-      <input type="text" name="verification" placeholder="Enter verify code " />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <header class="partials_header">
+      <div class="header_container">
+        <div class="header_flex">
+          <div class="logo">
+            <a href="/home"><h1>BookStore</h1></a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="form-container">
+      <div class="form-heading">
+        <h2>Enter Verification code</h2>
+      </div>
+
+      <form
+        class="ui form"
+        action="/users/<%=userInfo.id%>/verify"
+        method="post"
+      >
+        <div class="field">
+          <input
+            type="text"
+            name="verification"
+            placeholder="Enter verify code "
+          />
+        </div>
+        <input class="ui button" type="submit" value="submit" />
+      </form>
     </div>
-
-    <input class="ui button" type="submit" value="submit" />
-  </form>
-</div>
+  </body>
+</html>

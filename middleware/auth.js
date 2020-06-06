@@ -16,7 +16,7 @@ exports.userInfo = (req, res, next) => {
         req.session.userName = req.session.passport.user.name || "";
         User.findById(
             req.session.userId,
-            { email: 1, name: 1, userId: 1, image: 1, isVerified: 1 },
+            { email: 1, name: 1, userId: 1, image: 1, isVerified: 1,isblock:1 },
             (err, user) => {
                 if (err) return next(err)
                 req.user = user
@@ -27,7 +27,7 @@ exports.userInfo = (req, res, next) => {
     } else if (req.session.userId) {
       
         User.findById(req.session.userId,
-            { email: 1, name: 1, userId: 1, image: 1, isVerified: 1 },
+            { email: 1, name: 1, userId: 1, image: 1, isVerified: 1 ,isblock:1},
             (err, user) => {
                 if (err) return next(err);
                 req.user = user

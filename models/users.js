@@ -30,6 +30,10 @@ var userSchema = new Schema({
     isVerified: {
         type: Boolean,
         default: false
+    },
+    isblock:{
+        type:Boolean,
+        default:false
     }
 }, { timestamps: true })
 

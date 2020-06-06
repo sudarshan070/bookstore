@@ -11,7 +11,6 @@ exports.homePage = async (req, res, next) => {
         if (req.session.userId) {
             status = true;
         }
-        // var userName = req.user.name;
         var categories = await Category.find({});
         res.render("home", { categories, status })
     } catch (error) {
@@ -67,6 +66,7 @@ exports.myCart = async (req, res, next) => {
                 path: "book",
                 select: "title author category price image"
             })
+            console.log(booklist)
         res.render('myCart', { booklist, userName, categories })
     } catch (error) {
         next(error)

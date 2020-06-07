@@ -21,9 +21,6 @@ var upload = multer({ storage: storage })
 
 
 
-// Headers
-// router.get("/allboks", userController.header)
-
 /* GET users listing. */
 router.get("/", userController.getSession);
 
@@ -61,57 +58,16 @@ router.get("/shopping/bookDetail/:id", userController.singleBookDetail)
 
 // crete a review 
 // review
-router.post("/shopping/bookDetail/:bookId/review", async (req, res, next) => {
-  try {
-    var bookId = req.params.bookId;
-    req.body.bookId=bookId
-    req.body.author = res.locals.userInfo.name;
-    req.body.userId=req.session.userId;
-    var review = await Review.create(req.body);
-    await Book.findByIdAndUpdate(bookId, { $push: { reviews: review._id } }, { new: true });
-    console.log(req.body, "-------------")
-    res.redirect(`/users/shopping/bookDetail/${bookId}`);
-  } catch (error) {
-    next(error)
-  }
-})
+router.post("/shopping/bookDetail/:bookId/review", reviewController.createReview)
 
-router.get('/review/:reviewId/edit', async(req,res,next)=>{
-  try {
-    var review= await Review.findById(req.params.reviewId)
-  
-    if(review.userId == req.session.userId){
-      res.render('editReview',{review})
-      
-    }else{
-      res.redirect(`/users/shopping/bookDetail/${review.bookId}`)
-    }
-  } catch (error) {
-    next(error)
-  }
-})
-router.post('/review/:reviewId/edit', async(req,res,next)=>{
-  try {
-    console.log(req.body)
-    var review= await Review.findByIdAndUpdate(req.params.reviewId,req.body,{new:true});
-    console.log(review,"updated")
-    res.redirect(`/users/shopping/bookDetail/${review.bookId}`)
-  } catch (error) {
-    next(error)
-  }
-})
+// get edit review 
+router.get('/review/:reviewId/edit', reviewController.geteditReview)
 
-router.get('/review/:reviewId/delete',async(req,res,next)=>{
-  try {
-    var review= await Review.findById(req.params.reviewId);
-    if(review.userId == req.session.userId){
-    var review=await Review.findByIdAndDelete(req.params.reviewId);
-    console.log(review,"fdele");
-    }
-    res.redirect(`/users/shopping/bookDetail/${review.bookId}`)
+//post Edit Review 
+router.post('/review/:reviewId/edit', reviewController.posteditReview)
 
-  } catch (error) {
-    next(error);
-  }
-})
+
+// Delete Review
+router.get('/review/:reviewId/delete', reviewController.deleteReview)
+
 module.exports = router;

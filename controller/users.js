@@ -61,13 +61,10 @@ exports.postRegister = async (req, res, next) => {
 exports.nodemailer = async (req, res) => {
     try {
         var user = await User.findById(req.params.email);
-       
         if (user.verification == req.body.verification) {
             var update = await User.findByIdAndUpdate(user.id, { isVerified: true })
-            console.log(update, "here we ahe")
             res.redirect('/users/allbooks')
-        } else {
-            
+        } else {           
             res.render('userVerify')
         }
     } catch (error) {
@@ -96,7 +93,6 @@ exports.postLogin = (req, res, next) => {
             console.log("here w are")
             return res.redirect('/users/login')
         }
-
         req.session.userId = user.id
         res.redirect("/users/allbooks")
     })

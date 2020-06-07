@@ -1,4 +1,4 @@
-<%- include("partials/logoutHeader.ejs") -%>
+<%- include("partials/adminHeader.ejs") -%>
 
 <div class="form-container">
   <a href="/admin">
@@ -7,22 +7,22 @@
     </button>
   </a>
   <div class="form-heading">
-    <h2>Register Form</h2>
+    <h2>Edit Category</h2>
   </div>
   <form
     class="ui form"
-    action="/admin/<%=category.id %>/edit"
+    action="/admin/<%=category.id%>/edit"
     method="POST"
     enctype="multipart/form-data"
   >
-  <div class="field">
-    <input type="text" name="name" value="<%= category.name%>" />
-  </div>
-    
+    <div class="field">
+      <input type="text" name="name" value="<%=category.name%>" />
+    </div>
+
     <div class="field">
       <input class="choose-file" type="file" value="<%= category.image%>" />
     </div>
-    
+
     <input class="ui button" type="submit" value="Add" />
   </form>
 </div>

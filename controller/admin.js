@@ -47,21 +47,28 @@ exports.postCreateCategory = (req, res, next) => {
 
 
 // eddit category
-exports.editCategory = (req, res, next) => {
-    Category.findById(req.params.id, (err, category) => {
-        if (req.session.userId) {
-            if (err) return next(err)
-            res.render("editCategory", { category })
-        }
-    })
+exports.editCategory = async (req, res, next) => {
+    try {
+        var category = await Category.findById(req.params.id)
+        console.log(category.userId == req.session.userId, "_____req.session.userId-")
+        res.render("editCategory", { category })
+    } catch (error) {
+        next(error)
+    }
 }
 
 // post edit category
-exports.postEditCategory = (req, res, next) => {
-    Category.findByIdAndUpdate(req.params.id, req.body, (err, category) => {
-        if (err) return next(err)
+exports.postEditCategory = async (req, res, next) => {
+    try {
+        console.log("category post============================")
+        var category = Category.findByIdAndUpdate( req.params.id, req.body, { new: true })
+        console.log(category, "new category")
         res.redirect("/admin")
-    })
+    } catch (error) {
+        next(error)
+    }
+
+
 }
 
 
@@ -117,6 +124,7 @@ exports.getAllBook = (req, res, next) => {
 // get book detail
 exports.getBookDetail = (req, res, next) => {
     Book.findById(req.params.id).exec((err, books) => {
+        console.log(books.userId, req.session.userId, "----------098654123456789")
         if (err) return next(err)
         res.render("bookdetail", { books })
     })
@@ -138,7 +146,7 @@ exports.getEditBook = async (req, res, next) => {
 // post edit book
 exports.postEditBook = async (req, res, next) => {
     try {
-        var books = await Book.findByIdAndUpdate(req.params.id, req.body)
+        var books = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true })
         res.redirect("/admin/allBook/")
     } catch (error) {
         next(error)

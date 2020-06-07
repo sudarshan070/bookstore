@@ -66,7 +66,6 @@ exports.myCart = async (req, res, next) => {
                 path: "book",
                 select: "title author category price image"
             })
-            console.log(booklist)
         res.render('myCart', { booklist, userName, categories })
     } catch (error) {
         next(error)

@@ -3,29 +3,35 @@
 <div class="container">
   <div class="bookDetailheading"><h2>My Cart</h2></div>
 
-<div>
-  <% total = 0%> <% sum = 0%>
-</div>
+  <div>
+    <% total = 0%> <% sum = 0%>
+  </div>
 
-<% booklist.forEach (book =>{ %>
+  <% booklist.forEach (book =>{ %>
   <div class="bookdetailflex">
+    <div class="leftbookdetail">
+      <p>Title:<%= book.book.title%></p>
+      <p>Book Quentity: <%= book.qty%></p>
+      <img src="/images/<%= book.book.image%>" height="200px" />
+    </div>
+    <div class="rightbookdetail">
+      <p>Author:<%= book.book.author%></p>
+      <p>Category:<%= book.book.category%></p>
+      <p>Price:<%= book.book.price%></p>
+      <%sub = (book.qty*book.book.price) %>
+      <p>Product Total:<%= sub%></p>
+    </div>
+  </div>
 
-<p>Book Quentity: <%= book.qty%></p>
-<p> Title:<%= book.book.title%></p>
-<p>Author:<%= book.book.author%></p>
-<p>Category:<%= book.book.category%></p>
-<p>Price:<%= book.book.price%></p>
-<%sub = (book.qty*book.book.price) %>
-<p>Product Total:<%= sub%></p>
-<img src="/images/<%= book.book.image%>" height="200px" />
+  <%})%>
 
+  <p><%total = sub + total%></p>
 
-
-<%})%>
-
-<%total = sub + total%> <%if(total > 0){%>
-  <p>Grand Total : <%= total%></p>
-  <% } %>
-
+  <%if(total > 0){%>
+  <div class="bookdetailflex">
+    <div class="rightbookdetail">
+      <p class="grandTotle">Grand Total : <%= total%></p>
+      <% } %>
+    </div>
   </div>
 </div>

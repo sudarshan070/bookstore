@@ -46,7 +46,7 @@ exports.postCreateCategory = (req, res, next) => {
 }
 
 
-// eddit category
+// edit category
 exports.editCategory = async (req, res, next) => {
     try {
         var category = await Category.findById(req.params.id)
@@ -60,8 +60,7 @@ exports.editCategory = async (req, res, next) => {
 // post edit category
 exports.postEditCategory = async (req, res, next) => {
     try {
-        console.log("category post============================")
-        var category = Category.findByIdAndUpdate( req.params.id, req.body, { new: true })
+        var category = await Category.findByIdAndUpdate( req.params.id, req.body, { new: true })
         console.log(category, "new category")
         res.redirect("/admin")
     } catch (error) {
@@ -83,7 +82,7 @@ exports.deleteCategory = async (req, res, next) => {
     }
 }
 
-// categorywise books
+// categoryWise books
 exports.getCategoryWiseBook = (req, res, next) => {
     if (req.session) {
         Book.find({ category: req.params.name }, (err, books) => {
@@ -93,7 +92,7 @@ exports.getCategoryWiseBook = (req, res, next) => {
 }
 
 
-// get createbook
+// get create book
 exports.getCreateBook = async (req, res, next) => {
     try {
         var categories = await Category.find({})

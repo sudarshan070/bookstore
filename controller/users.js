@@ -5,6 +5,7 @@ var Category = require("../models/category")
 var Book = require("../models/books");
 var Cart = require('../models/cart')
 var Booklist = require("../models/booklist")
+var flash = require('connect-flash');
 
 
 // get session 
@@ -53,19 +54,19 @@ exports.postRegister = async (req, res, next) => {
     console.log(user, "here")
     var cart = await Cart.create({ userId: user.id })
     var newuser = await User.findByIdAndUpdate(user.id, { $addToSet: { cart: cart.id } });
-    console.log(newuser, "user", cart, "cart")
+    // console.log(newuser, "user", cart, "cart")
     res.redirect('/users/login')
 }
 
 
-exports.nodemailer = async (req, res) => {
+exports.verification = async (req, res, next) => {
     try {
         var user = await User.findById(req.params.email);
         if (user.verification == req.body.verification) {
             var update = await User.findByIdAndUpdate(user.id, { isVerified: true })
             res.redirect('/users/allbooks')
-        } else {           
-            res.render('userVerify')
+        } else {
+            res.render('userVerify', req.flash('Verification code is wrong'))
         }
     } catch (error) {
         next(error)
@@ -86,11 +87,10 @@ exports.postLogin = (req, res, next) => {
         if (!user) {
             res.redirect("/users/login")
         }
-        if (!user.verifyPassword(password)) {
+        if (!user.verifyPassword(password) && !user.verifyPassword(password) == "") {
             return res.redirect("/users/login")
         }
-        if(user.isblock){
-            console.log("here w are")
+        if (user.isblock) {
             return res.redirect('/users/login')
         }
         req.session.userId = user.id
@@ -99,13 +99,10 @@ exports.postLogin = (req, res, next) => {
 }
 
 // logout user
-// change here delete user wikthout distroy session
 exports.logoutUser = (req, res, next) => {
     req.session.destroy();
     res.redirect("/home")
 }
-
-
 
 
 // get all books
@@ -126,7 +123,7 @@ exports.getAllBook = async (req, res, next) => {
 
 }
 
-// shoping route
+// shopping route
 exports.shopping = async (req, res, next) => {
     try {
         if (!req.user.isVerified) {

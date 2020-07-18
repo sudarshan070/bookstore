@@ -5,8 +5,6 @@ var reviewController = require('../controller/review')
 var multer = require("multer")
 var path = require("path")
 var auth = require("../middleware/auth")
-var Review = require('../models/review')
-var Book = require('../models/books')
 
 // multer profile image add 
 var storage = multer.diskStorage({
@@ -25,11 +23,11 @@ var upload = multer({ storage: storage })
 router.get("/", userController.getSession);
 
 
-// registe user 
+// register user 
 // get register user 
 router.get("/register", userController.getRegister)
 
-// post register usser
+// post register user
 router.post("/register", upload.single("image"), userController.postRegister)
 // login user
 // get login user
@@ -42,15 +40,15 @@ router.post("/login", userController.postLogin)
 router.get("/logout", userController.logoutUser)
 
 // verify user
-router.post("/:email/verify", userController.nodemailer)
+router.post("/:email/verify", userController.verification)
 
 // get all book
 router.get("/allbooks", auth.logged, userController.getAllBook)
 
-// shoppig route
+// shopping route
 router.get("/shopping", auth.logged, userController.shopping)
 
-// categorywiseBooks
+// categoryWise Books
 router.get('/shopping/:name', userController.userSideBooks)
 
 // book detail

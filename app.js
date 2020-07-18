@@ -10,6 +10,7 @@ var passport = require("passport")
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
+var flash = require('connect-flash');
 
 
 
@@ -42,6 +43,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash())
 
 app.use(
   session({
@@ -53,12 +55,13 @@ app.use(
 );
 
 
+
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(auth.userInfo)
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/admin',auth.logged, adminRouter);
+app.use('/admin', auth.logged, adminRouter);
 
 
 

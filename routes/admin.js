@@ -3,7 +3,6 @@ var router = express.Router();
 var adminController = require("../controller/admin")
 var multer = require("multer")
 var path = require("path");
-var auth = require("../middleware/auth");
 var User=require('../models/users');
 
 
@@ -19,7 +18,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 
-// admin dashbord
+// admin dashboard
 router.get('/',  adminController.getDashboard);
 
 // createCategory of book get route

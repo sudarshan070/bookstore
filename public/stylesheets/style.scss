@@ -483,3 +483,21 @@ ul {
 .back {
   padding-top: 24px;
 }
+
+// ***************************** media *******************************
+@media only screen and (max-width: 700px) {
+  .form-container {
+    width: 95%;
+    margin: 0 auto;
+    box-shadow: none;
+  }
+  .allBooks {
+    width: 95%;
+    margin: 0 auto;
+    .allBooksSingle {
+      width: 90%;
+      padding: 15px;
+      margin: 12px 12px 50px;
+    }
+  }
+}

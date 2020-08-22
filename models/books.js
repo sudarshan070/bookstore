@@ -14,7 +14,6 @@ var bookSchema = new Schema({
     },
     category: {
         type: String,
-        required: true
     },
     detail: String,
     price: String,

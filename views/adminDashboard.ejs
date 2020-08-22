@@ -75,8 +75,8 @@
       </a>
     </div>
     <div class="flex-card">
-      <% categories.forEach( category => { %>
-
+      <% categories.filter( category => { %>
+         <%console.log(category, "category")%>
       <a href="/admin/getCategory/<%=category.name%>">
         <div class="card categoryCard" style="width: 18rem;">
           <img

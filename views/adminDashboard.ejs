@@ -50,29 +50,30 @@
       </div>
     </header>
 
-    <a href="/admin/createCategory">
-      <button type="button" class="btn btn-primary mr-1 my-1">
-        Add Category
-      </button>
-    </a>
+    <div class="admin-text-center">
+      <a href="/admin/createCategory">
+        <button type="button" class="btn btn-primary mr-1 my-1">
+          Add Category
+        </button>
+      </a>
 
-    <a href="/admin/allBook">
-      <button type="button" class="btn btn-primary mr-1 my-1">
-        All Books
-      </button>
-    </a>
+      <a href="/admin/allBook">
+        <button type="button" class="btn btn-primary mr-1 my-1">
+          All Books
+        </button>
+      </a>
 
-    <a href="/admin/createBook">
-      <button type="button" class="btn btn-primary mr-1 my-1">
-        Create Books
-      </button>
-    </a>
-    <a href="/admin/users">
-      <button type="button" class="btn btn-primary mr-1 my-1">
-        Users
-      </button>
-    </a>
-
+      <a href="/admin/createBook">
+        <button type="button" class="btn btn-primary mr-1 my-1">
+          Create Books
+        </button>
+      </a>
+      <a href="/admin/users">
+        <button type="button" class="btn btn-primary mr-1 my-1">
+          Users Detail
+        </button>
+      </a>
+    </div>
     <div class="flex-card">
       <% categories.forEach( category => { %>
 
@@ -101,6 +102,5 @@
 
       <% }) %>
     </div>
-   
   </body>
 </html>

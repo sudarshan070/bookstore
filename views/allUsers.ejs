@@ -1,16 +1,30 @@
 <%- include("partials/adminHeader.ejs") -%>
 
 <div>
-  <% users.forEach( user => { %>
-  <p><%=user.name%></p>
-  <% if(!user.isblock){%>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="table-heading ml-2" scope="col">Name</th>
+        <th class="table-heading" scope="col">Email</th>
+        <th class="table-heading" scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach( user => { %>
+      <tr>
+        <td class="ml-2"><%=user.name%></td>
+        <td><%= user.email%></td>
+        <td>
+          <% if(!user.isblock){%>
 
-    <a href="/admin/users/<%=user.id%>/block">Block</a>
-    <%}%>
+          <a href="/admin/users/<%=user.id%>/block">Block</a>
+          <%}%> <% if(user.isblock){%>
 
-    <% if(user.isblock){%>
-    
-      <a href="/admin/users/<%=user.id%>/unblock">Unblock</a>
-      <%}%>
-  <% }) %>
+          <a href="/admin/users/<%=user.id%>/unblock">Unblock</a>
+          <%}%>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
 </div>

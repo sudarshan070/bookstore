@@ -2,6 +2,16 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+.admin-text-center {
+  text-align: center;
+  padding-top: 2rem !important;
+}
+
+.table-heading {
+  font-size: 22px;
+  font-weight: 600;
+}
+
 html,
 body,
 div,
@@ -601,6 +611,10 @@ ul {
 
 .back {
   padding-top: 24px;
+}
+
+.padding-top-userDetail {
+  padding-top: 2rem;
 }
 
 @media only screen and (max-width: 700px) {

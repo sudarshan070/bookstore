@@ -1,34 +1,44 @@
 <%- include("partials/logoutHeader.ejs") -%>
 
 <div class="container">
-  <div class="bookDetailheading"><h2>Book Detail</h2></div>
-  <div class="bookdetailflex">
-    <div class="leftbookdetail">
-      <p>Titel: <%=books.title%></p>
-      <p>Author: <%=books.author%></p>
+  <div class="bookDetailHeading"><h2>Book Detail</h2></div>
+  <div class="bookDetailFlex">
+    <div class="leftBookDetail">
       <img src="/images/<%= books.image%>" width="150px" />
     </div>
-    <div class="rightbookdetail">
-      <p>Category: <%=books.category%></p>
-      <p>Detail: <%=books.detail%></p>
-      <p>Publisher: <%=books.publisher%></p>
-      <p>Price: <%=books.price%></p>
-      <p>Stock: <%=books.stock%></p>
-      <form action="/add/<%= books.id%>" method="POST">
-        <input type="number" name="qty" />
-        <button type="submit">Add to Cart</button>
-      </form>
+    <div class="rightBookDetail">
+      <p class="book-detail-title"><%=books.title%></p>
+      <p class="book-detail-price">Price: <%=books.price%></p>
+      <span>Inclusive of all taxes </span>
+      <div class="book-detail-form">
+        <form action="/add/<%= books.id%>" method="POST">
+          <input type="number" name="qty" />
+          <input class="book-detail-btn" type="submit" value="Add to Cart" />
+        </form>
+      </div>
     </div>
   </div>
+
+  <div>
+    <p class="book-detail-title">Product Specifications</p>
+    <h4>Description</h4>
+    <p><%=books.detail%></p>
+    <div class="bookDetailFlex">
+      <div class="leftBookDetail">
+        <p>Author: <%=books.author%></p>
+        <p>Category: <%=books.category%></p>
+      </div>
+      <div class="rightBookDetail">
+        <p>Publisher: <%=books.publisher%></p>
+        <p>Stock: <%=books.stock%></p>
+      </div>
+    </div>
+  </div>
+
   <div class="bookReviews">
     <div class="borderbottom">
       <div class="bookReviewsFlex">
         <h2>Customer Reviews</h2>
-        <a href="">
-          <button type="button" class="btn btn-primary mr-1 my-1">
-            Write a Review
-          </button>
-        </a>
       </div>
       <form
         id="form"
@@ -45,13 +55,13 @@
     </div>
   </div>
   <% books.reviews.forEach(review => { %>
- <div class="reviewbox">
-  <h3><%=review.author%></h3>
-  <p><%=review.content%></p>
-  <% if(review.userId == userInfo.id){%>
-  <a href="/users/review/<%=review.id%>/edit">Edit</a>
-  <a href="/users/review/<%=review.id%>/delete">Delete</a>
-  <%}%>
- </div>
+  <div class="reviewbox">
+    <h3><%=review.author%></h3>
+    <p><%=review.content%></p>
+    <% if(review.userId == userInfo.id){%>
+    <a href="/users/review/<%=review.id%>/edit">Edit</a>
+    <a href="/users/review/<%=review.id%>/delete">Delete</a>
+    <%}%>
+  </div>
   <% })%>
 </div>

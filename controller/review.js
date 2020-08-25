@@ -18,7 +18,7 @@ exports.createReview = async (req, res, next) => {
 }
 
 // edit REview get 
-exports.geteditReview = async (req, res, next) => {
+exports.getEditReview = async (req, res, next) => {
     try {
         var review = await Review.findById(req.params.reviewId)
         if (review.userId == req.session.userId) {
@@ -33,7 +33,7 @@ exports.geteditReview = async (req, res, next) => {
 
 
 //   Edit Review  post
-exports.posteditReview = async (req, res, next) => {
+exports.postEditReview = async (req, res, next) => {
     try {
         var review = await Review.findByIdAndUpdate(req.params.reviewId, req.body, { new: true });
         res.redirect(`/users/shopping/bookDetail/${review.bookId}`)

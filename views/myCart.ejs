@@ -1,20 +1,20 @@
 <%- include("partials/logoutHeader.ejs") -%>
 
 <div class="container">
-  <div class="bookDetailheading"><h2>My Cart</h2></div>
+  <div class="bookDetailHeading"><h2>My Cart</h2></div>
 
   <div>
     <% total = 0%> <% sum = 0%>
   </div>
 
   <% booklist.forEach (book =>{ %>
-  <div class="bookdetailflex">
-    <div class="leftbookdetail">
+  <div class="bookDetailFlex">
+    <div class="leftBookDetail">
       <p>Title:<%= book.book.title%></p>
-      <p>Book Quentity: <%= book.qty%></p>
+      <p>Book Quantity: <%= book.qty%></p>
       <img src="/images/<%= book.book.image%>" height="200px" />
     </div>
-    <div class="rightbookdetail">
+    <div class="rightBookDetail">
       <p>Author:<%= book.book.author%></p>
       <p>Category:<%= book.book.category%></p>
       <p>Price:<%= book.book.price%></p>

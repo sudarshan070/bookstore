@@ -1,14 +1,19 @@
-<form
-id="form"
-action=""
-method="POST"
->
-<input
-  class="reviewInput"
-  type="text"
-  name="content"
-  placeholder="Write a Review"
-  value="<%=review.content%>"
-/>
-<button type="submit">Update</button>
-</form>
+
+<div class="form-container">
+  <div class="form-heading">
+    <h2>Edit a Review</h2>
+  </div>
+
+  <form class="ui form" id="form" action="" method="POST">
+    <div class="field">
+      <input
+        class="reviewInput"
+        type="text"
+        name="content"
+        placeholder="Write a Review"
+        value="<%=review.content%>"
+      />
+    </div>
+    <button class="ui button" type="submit">Update</button>
+  </form>
+</div>

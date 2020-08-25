@@ -56,7 +56,7 @@
   </div>
   <% books.reviews.forEach(review => { %>
   <div class="reviewbox">
-    <h3><%=review.author%></h3>
+    <h5><%=review.author%></h5>
     <p><%=review.content%></p>
     <% if(review.userId == userInfo.id){%>
     <a href="/users/review/<%=review.id%>/edit">Edit</a>

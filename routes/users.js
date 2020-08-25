@@ -59,10 +59,10 @@ router.get("/shopping/bookDetail/:id", userController.singleBookDetail)
 router.post("/shopping/bookDetail/:bookId/review", reviewController.createReview)
 
 // get edit review 
-router.get('/review/:reviewId/edit', reviewController.geteditReview)
+router.get('/review/:reviewId/edit', reviewController.getEditReview)
 
 //post Edit Review 
-router.post('/review/:reviewId/edit', reviewController.posteditReview)
+router.post('/review/:reviewId/edit', reviewController.postEditReview)
 
 
 // Delete Review

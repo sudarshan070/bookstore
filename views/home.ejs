@@ -44,13 +44,12 @@
                   Signup
                 </button>
               </a>
-              <%}%> 
+              <%}%>
               <a href="/auth/google">
                 <button type="button" class="btn btn-primary mr-1 my-1">
                   Admin Login
                 </button>
               </a>
-           
             </div>
           </div>
         </div>
@@ -67,6 +66,19 @@
           >
         </div>
       </section>
+
+      <section>
+        <div class="allBooks">
+          <% books.filter(book =>{%>
+          <div class="allBooksSingle">
+              <img src="/images/<%= book.image%>" />
+              <h2><%= book.title%></h2>
+              <p><%= book.price%></p>
+          </div>
+          <%})%>
+        </div>
+      </section>
+      
     </main>
   </body>
 </html>

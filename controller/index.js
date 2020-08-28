@@ -12,7 +12,8 @@ exports.homePage = async (req, res, next) => {
             status = true;
         }
         var categories = await Category.find({});
-        res.render("home", { categories, status })
+        var books = await Book.find({})
+        res.render("home", { categories, status, books })
     } catch (error) {
         next(error)
     }

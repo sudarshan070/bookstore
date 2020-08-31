@@ -422,9 +422,6 @@ ul {
       0px 9px 12px rgba(0, 0, 0, 0.1);
     margin: 0;
   }
-  .book-detail-btn {
-    width: 50%;
-  }
 }
 .book-detail-form {
   padding-top: 2rem;
@@ -460,7 +457,7 @@ ul {
 
 .reviewbox {
   border-bottom: 1px solid #ccc;
-  padding: 12px 0;5
+  padding: 12px 0;
 }
 .grandTotale {
   float: right;
@@ -534,5 +531,9 @@ img {
       padding: 15px;
       margin: 12px 12px 50px;
     }
+  }
+  .leftBookDetail,
+  .rightBookDetail {
+    width: 100%;
   }
 }

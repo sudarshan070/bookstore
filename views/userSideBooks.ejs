@@ -1,30 +1,13 @@
-
-
 <%- include("partials/logoutHeader.ejs") -%>
 
-<div class="allbookFlex">
-  <% books.filter(books =>{%>
-  <div class="ui card">
-    <div class="image">
-      <img src="/images/<%= books.image%>"  width="200px"/>
-    </div>
-    <div class="content">
-      <a href="/users/shopping/bookDetail/<%= books.id%>" class="header">
-        <%= books.title%>
-      </a>
-      <div class="meta">
-        <span class="date"><%= books.authore%></span>
-      </div>
-      <div class="description">
-        <%= books.detail%>
-      </div>
-    </div>
-    <div class="extra content">
-      <a>
-        <i class="book icon"></i>
-        <%= books.stock%>
-      </a>
-    </div>
+<div class="allBooks">
+  <% books.filter(book =>{%>
+  <div class="allBooksSingle">
+    <a class="bookTitle" href="/users/shopping/bookDetail/<%= book.id%>">
+      <img src="/images/<%= book.image%>" />
+      <h2><%= book.title%></h2>
+      <p><%= book.price%></p>
+    </a>
   </div>
   <%})%>
 </div>

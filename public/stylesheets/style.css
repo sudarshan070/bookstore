@@ -529,10 +529,6 @@ ul {
   margin: 0;
 }
 
-.bookDetailFlex .book-detail-btn {
-  width: 50%;
-}
-
 .book-detail-form {
   padding-top: 2rem;
 }
@@ -663,6 +659,10 @@ img {
     width: 90%;
     padding: 15px;
     margin: 12px 12px 50px;
+  }
+  .leftBookDetail,
+  .rightBookDetail {
+    width: 100%;
   }
 }
 /*# sourceMappingURL=style.css.map */

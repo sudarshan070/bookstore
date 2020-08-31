@@ -12,8 +12,13 @@
       <span>Inclusive of all taxes </span>
       <div class="book-detail-form">
         <form action="/add/<%= books.id%>" method="POST">
-          <input type="number" name="qty" />
-          <input class="book-detail-btn" type="submit" value="Add to Cart" />
+          <input class="ui basic button " type="number" name="qty" />
+
+          <input
+            class="ui primary basic button"
+            type="submit"
+            value="Add to Cart"
+          />
         </form>
       </div>
     </div>

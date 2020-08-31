@@ -54,7 +54,6 @@ exports.postRegister = async (req, res, next) => {
     console.log(user, "here")
     var cart = await Cart.create({ userId: user.id })
     var newuser = await User.findByIdAndUpdate(user.id, { $addToSet: { cart: cart.id } });
-    // console.log(newuser, "user", cart, "cart")
     res.redirect('/users/login')
 }
 

@@ -26,16 +26,13 @@ exports.homePage = async (req, res, next) => {
 // add to cart
 exports.addToCart = async (req, res, next) => {
     try {
+        console.log(req.body);
         var book = await Book.findById(req.params.bookId);
         var cart = await Cart.findOne({ userId: req.user.id })
         var booklist = await Booklist.findOne({ book: book.id })
         var booklist2 = await Booklist.findOne({ cart: cart.id })
         if (booklist && booklist2) {
-            var booklist = await Booklist.findByIdAndUpdate(
-                booklist.id,
-                { $inc: { qty: req.body.qty } },
-                { new: true }
-            );
+            var booklist = await Booklist.findByIdAndUpdate(booklist.id,  { qty: req.body.qty } , { new: true });
         } else if (!booklist2 && !booklist) {
             req.body.book = book.id;
             req.body.cart = cart.id

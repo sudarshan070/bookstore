@@ -4,7 +4,8 @@
   <div class="bookDetailHeading"><h2>My Cart</h2></div>
 
   <div>
-    <% total = 0%> <% sum = 0%>
+    <% total = 0%> 
+    <% sum = 0%>
   </div>
 
   <% booklist.forEach (book =>{ %>
@@ -18,8 +19,7 @@
       <p>Author:<%= book.book.author%></p>
       <p>Category:<%= book.book.category%></p>
       <p>Price:<%= book.book.price%></p>
-      <%sub = (book.qty*book.book.price) %>
-      <p>Product Total:<%= sub%></p>
+      <p>Product Total:<%=(book.qty * book.book.price)%></p>
     </div>
   </div>
 
@@ -27,9 +27,10 @@
 
 
   <%if(total > 0){%>
+    <%console.log(total, "total")%>
   <div class="bookdetailflex">
     <div class="rightbookdetail">
-      <p class="grandTotle">Grand Total : <%= total%></p>
+      <p class="grandTotal">Grand Total : <%= total%></p>
       <% } %>
     </div>
   </div>
